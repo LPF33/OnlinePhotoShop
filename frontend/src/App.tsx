@@ -1,13 +1,13 @@
 import React from "react";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
-import Slider from "./Components/Slider";
+import Slider2 from "./Components/Slider2";
 
 const App: React.FC = () => {
     return (
         <>
             <Header />
-            <Slider />
+            <Slider2 />
             <Footer />
         </>
     );
