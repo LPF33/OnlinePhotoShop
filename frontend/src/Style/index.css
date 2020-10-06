@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+    vertical-align: baseline;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+}
