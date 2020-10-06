@@ -3,6 +3,7 @@ import Slide from "./Slide";
 import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
 import SliderButton, { ButtonDirection } from "./SliderButton";
 import SliderDots from "./SliderDots";
+import useDetectTouch from "../CustomHooks/DetectTouch";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -59,32 +60,6 @@ const Slider: React.FC = () => {
         };
     }, []);
 
-    const changeimageArr = (): void => {
-        let _slides: string[] = [];
-
-        if (slideState.currentSlide === images.length - 1) {
-            _slides = [
-                images[images.length - 2],
-                images[images.length - 1],
-                images[0],
-            ];
-        } else if (slideState.currentSlide === 0) {
-            _slides = [images[images.length - 1], images[0], images[1]];
-        } else {
-            _slides = images.slice(
-                slideState.currentSlide - 1,
-                slideState.currentSlide + 2
-            );
-        }
-
-        setSlideState({
-            ...slideState,
-            imageArr: _slides,
-            transition: 0,
-            translate: 100,
-        });
-    };
-
     const slide = (direction: ButtonDirection): void => {
         clearTimeout(animationId.current);
         switch (direction) {
@@ -121,6 +96,34 @@ const Slider: React.FC = () => {
         );
     };
 
+    const { touch } = useDetectTouch(slide);
+
+    const changeimageArr = (): void => {
+        let _slides: string[] = [];
+
+        if (slideState.currentSlide === images.length - 1) {
+            _slides = [
+                images[images.length - 2],
+                images[images.length - 1],
+                images[0],
+            ];
+        } else if (slideState.currentSlide === 0) {
+            _slides = [images[images.length - 1], images[0], images[1]];
+        } else {
+            _slides = images.slice(
+                slideState.currentSlide - 1,
+                slideState.currentSlide + 2
+            );
+        }
+
+        setSlideState({
+            ...slideState,
+            imageArr: _slides,
+            transition: 0,
+            translate: 100,
+        });
+    };
+
     const slideWrapperProps: TSlideWrapperProps = {
         width: slideState.imageArr.length * 100,
         translate: slideState.translate / slideState.imageArr.length,
@@ -135,14 +138,18 @@ const Slider: React.FC = () => {
                 ))}
             </SliderWrapper>
 
-            <SliderButton
-                direction={ButtonDirection.LEFT}
-                clickHandler={slide}
-            />
-            <SliderButton
-                direction={ButtonDirection.RIGHT}
-                clickHandler={slide}
-            />
+            {!touch && (
+                <SliderButton
+                    direction={ButtonDirection.LEFT}
+                    clickHandler={slide}
+                />
+            )}
+            {!touch && (
+                <SliderButton
+                    direction={ButtonDirection.RIGHT}
+                    clickHandler={slide}
+                />
+            )}
             <SliderDots images={images} current={slideState.currentSlide} />
         </Wrapper>
     );
