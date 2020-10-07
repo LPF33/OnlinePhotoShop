@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import { MainScreenWrapper } from "../Style/MainScreen";
 
 import Slide from "./Slide";
 import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
@@ -8,17 +8,6 @@ import SliderDots from "./SliderDots";
 import Header from "./Header";
 
 import useDetectTouch from "../CustomHooks/DetectTouch";
-
-const Wrapper = styled.div`
-    position: absolute;
-    top: calc(50% - 5vh);
-    width: 80vh;
-    height: 80vh;
-    transform: translateY(-50%);
-    overflow: hidden;
-    border-radius: 50%;
-    display: flex;
-`;
 
 interface State {
     translate: number;
@@ -135,7 +124,7 @@ const Slider: React.FC = () => {
     };
 
     return (
-        <Wrapper>
+        <MainScreenWrapper>
             <Header />
             <SliderWrapper styleProps={slideWrapperProps}>
                 {slideState.imageArr.map((item, index) => (
@@ -156,7 +145,7 @@ const Slider: React.FC = () => {
                 />
             )}
             <SliderDots images={images} current={slideState.currentSlide} />
-        </Wrapper>
+        </MainScreenWrapper>
     );
 };
 

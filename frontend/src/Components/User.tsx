@@ -1,11 +1,11 @@
 import * as React from "react";
-import { IconWrapper, Icon } from "../Style/FooterIcons";
+import { IconLinkWrapper, Icon } from "../Style/FooterIcons";
 
 const User: React.FC = () => {
     return (
-        <IconWrapper>
+        <IconLinkWrapper to="/login">
             <Icon className="fas fa-user"></Icon>
-        </IconWrapper>
+        </IconLinkWrapper>
     );
 };
 

@@ -10,14 +10,14 @@ const Button = styled.button`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 10%;
+    width: 5vw;
     height: 100%;
     color: black;
     background-color: rgba(0, 0, 0, 0.3);
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: rgb(128, 120, 120);
+        background-color: rgba(0, 0, 0, 0.9);
+        color: rgb(1, 103, 187);
     }
 
     ${({ dir }) => (dir === ButtonDirection.LEFT ? "left:0" : "right:0")};

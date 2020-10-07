@@ -1,6 +1,19 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const IconWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    height: 10vh;
+    &:hover {
+        background-color: rgb(165, 110, 110);
+    }
+`;
+
+export const IconLinkWrapper = styled(Link)`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +32,7 @@ export const Icon = styled.i`
         transform: scale(2);
     }
     @media screen and (min-width: 1440px) {
-        transform: scale(3);
+        transform: scale(2.5);
     }
 `;
 

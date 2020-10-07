@@ -1,7 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import Slider from "./Components/Slider";
 import Footer from "./Components/Footer";
-import styled from "styled-components";
+import Login from "./Components/Login";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -18,10 +21,19 @@ const BodyWrapper = styled.div`
 
 const App: React.FC = () => {
     return (
-        <BodyWrapper>
-            <Slider />
-            <Footer />
-        </BodyWrapper>
+        <BrowserRouter>
+            <BodyWrapper>
+                <Switch>
+                    <Route exact path="/">
+                        <Slider />
+                    </Route>
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
+                </Switch>
+                <Footer />
+            </BodyWrapper>
+        </BrowserRouter>
     );
 };
 
