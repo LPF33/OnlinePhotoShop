@@ -1,11 +1,13 @@
 import * as React from "react";
+import styled from "styled-components";
+
 import Slide from "./Slide";
 import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
 import SliderButton, { ButtonDirection } from "./SliderButton";
 import SliderDots from "./SliderDots";
 import Header from "./Header";
+
 import useDetectTouch from "../CustomHooks/DetectTouch";
-import styled from "styled-components";
 
 const Wrapper = styled.div`
     position: absolute;

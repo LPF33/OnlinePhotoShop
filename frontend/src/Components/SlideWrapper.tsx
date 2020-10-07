@@ -4,11 +4,11 @@ import styled from "styled-components";
 const Content = styled.div`
     position: relative;
     height: 100%;
-    width: ${(props) => props.theme.width}%;
+    width: ${({ theme }) => theme.width}%;
     display: flex;
     align-items: center;
-    transform: translateX(-${(props) => props.theme.translate}%);
-    transition: transform ease-in ${(props) => props.theme.transition}s;
+    transform: translateX(-${({ theme }) => theme.translate}%);
+    transition: transform ease-in ${({ theme }) => theme.transition}s;
 `;
 
 export interface TSlideWrapperProps {

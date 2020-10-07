@@ -14,7 +14,7 @@ const Dot = styled.div`
     padding: 5px;
     margin-right: 5px;
     border-radius: 50%;
-    border: 3px solid ${(props) => (props.theme === "true" ? "green" : "black")};
+    border: 3px solid ${({ theme }) => (theme === "true" ? "green" : "black")};
 `;
 
 interface TSliderDots {

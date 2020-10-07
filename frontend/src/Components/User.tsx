@@ -1,35 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
-
-const UserWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 100%;
-    height: 10vh;
-    &:hover {
-        background-color: rgb(165, 110, 110);
-    }
-`;
-
-const Icon = styled.i`
-    transform: scale(1.5);
-    color: white;
-
-    @media screen and (min-width: 768px) {
-        transform: scale(2);
-    }
-    @media screen and (min-width: 1440px) {
-        transform: scale(3);
-    }
-`;
+import { IconWrapper, Icon } from "../Style/FooterIcons";
 
 const User: React.FC = () => {
     return (
-        <UserWrapper>
+        <IconWrapper>
             <Icon className="fas fa-user"></Icon>
-        </UserWrapper>
+        </IconWrapper>
     );
 };
 
