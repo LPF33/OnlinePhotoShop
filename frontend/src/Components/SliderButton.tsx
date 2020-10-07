@@ -1,16 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
 
+export enum ButtonDirection {
+    LEFT = "left",
+    RIGHT = "right",
+}
+
 const Button = styled.button`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 5%;
+    width: 10%;
     height: 100%;
-    color: white;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.3);
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.452);
+        background-color: rgba(0, 0, 0, 0.5);
         color: rgb(128, 120, 120);
     }
 
@@ -20,11 +26,6 @@ const Button = styled.button`
 const Icon = styled.i`
     transform: scale(2);
 `;
-
-export enum ButtonDirection {
-    LEFT = "left",
-    RIGHT = "right",
-}
 
 interface TButton {
     direction: ButtonDirection;

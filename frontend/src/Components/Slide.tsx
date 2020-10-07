@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const Image = styled.img`
     position: relative;
-    min-width: 100vw;
-    height: 100vh;
+    min-width: 80vh;
+    height: 80vh;
     object-fit: cover;
 `;
 
@@ -13,7 +13,7 @@ type TProps = {
 };
 
 const Slide: React.FC<TProps> = ({ image }) => {
-    return <Image alt="picture" src={`/sliderImages/${image}.JPG`} />;
+    return <Image alt="picture" src={`/sliderImages/${image}.PNG`} />;
 };
 
 export default Slide;

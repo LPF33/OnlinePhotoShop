@@ -3,17 +3,19 @@ import Slide from "./Slide";
 import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
 import SliderButton, { ButtonDirection } from "./SliderButton";
 import SliderDots from "./SliderDots";
+import Header from "./Header";
 import useDetectTouch from "../CustomHooks/DetectTouch";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100vh;
+    position: absolute;
+    top: calc(50% - 5vh);
+    width: 80vh;
+    height: 80vh;
+    transform: translateY(-50%);
     overflow: hidden;
-    background-color: black;
+    border-radius: 50%;
     display: flex;
-    align-items: center;
 `;
 
 interface State {
@@ -132,6 +134,7 @@ const Slider: React.FC = () => {
 
     return (
         <Wrapper>
+            <Header />
             <SliderWrapper styleProps={slideWrapperProps}>
                 {slideState.imageArr.map((item, index) => (
                     <Slide image={item} key={index} />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Content = styled.div`
     position: relative;
-    height: 100vh;
+    height: 100%;
     width: ${(props) => props.theme.width}%;
     display: flex;
     align-items: center;
