@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getLogin } from "./controllers";
+import { getData } from "./controllers";
 
 const router: Router = Router();
 
-router.get("/api/login", getLogin);
+router.get("/api/data", getData);
 
 export default router;
