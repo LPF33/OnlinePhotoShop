@@ -1,9 +1,13 @@
 import * as React from "react";
 import { ButtonDirection } from "../Components/SliderButton";
 
+interface ReturnTypeDetectTouch {
+    touch: boolean;
+}
+
 export default function useDetectTouch(
     slideFunction: (direction: ButtonDirection) => void
-) {
+): ReturnTypeDetectTouch {
     const [touch, setTouch] = React.useState<boolean>(false);
     const touchStartPoint = React.useRef<number>(0);
 

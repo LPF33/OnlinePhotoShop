@@ -39,30 +39,52 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postLogin = exports.getData = void 0;
+exports.getCategoryProducts = exports.getCategory = void 0;
 var database_1 = __importDefault(require("./database"));
-var getData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var getCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var result, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, database_1.default.query("SELECT * FROM products where id = 5;")];
+                return [4 /*yield*/, database_1.default.query("SELECT category, categories, image FROM products GROUP BY category;")];
             case 1:
-                result = _a.sent();
-                res.json({ result: result[0] });
+                result = (_a.sent())[0];
+                res.json({ success: true, result: result });
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                res.json({ err: err_1 });
+                res.json({ success: false, err: err_1 });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.getData = getData;
+exports.getCategory = getCategory;
+var getCategoryProducts = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var type, result, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                type = req.params.type;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, database_1.default.query("SELECT * FROM products where categories = ?;", [type])];
+            case 2:
+                result = (_a.sent())[0];
+                res.json({ success: true, result: result });
+                return [3 /*break*/, 4];
+            case 3:
+                err_2 = _a.sent();
+                res.json({ success: false, err: err_2 });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getCategoryProducts = getCategoryProducts;
 var postLogin = function (req, res) {
-    var _a = req.body, name = _a.name, password = _a.password;
+    var _a = req.params, name = _a.name, password = _a.password;
     res.send({ name: name, password: password });
 };
-exports.postLogin = postLogin;

@@ -13,7 +13,12 @@ type TProps = {
 };
 
 const Slide: React.FC<TProps> = ({ image }) => {
-    return <Image alt="picture" src={`/sliderImages/${image}.PNG`} />;
+    return (
+        <Image
+            alt="picture"
+            src={require(`../images/sliderImages/${image}.PNG`)}
+        />
+    );
 };
 
 export default Slide;

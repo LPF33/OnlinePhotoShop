@@ -2,10 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 import CartIcon from "./CartIcon";
 import User from "./User";
-import Menu from "./Menu";
-import Bestseller from "./Bestseller";
+import { MenuButton } from "./Menu";
+import Bookmark from "./Bookmark";
+import PictureMenu from "./PictureMenu";
 
-const FooterWrapper = styled.footer`
+const NavMenuWrapper = styled.nav`
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -16,25 +17,26 @@ const FooterWrapper = styled.footer`
     justify-content: center;
 `;
 
-const FooterGrid = styled.div`
+const NavMenuGrid = styled.div`
     width: 80vh;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     align-items: center;
     justify-content: center;
 `;
 
-const Footer: React.FC = () => {
+const NavMenu: React.FC = () => {
     return (
-        <FooterWrapper>
-            <FooterGrid>
+        <NavMenuWrapper>
+            <NavMenuGrid>
                 <User />
+                <PictureMenu />
                 <CartIcon />
-                <Bestseller />
-                <Menu />
-            </FooterGrid>
-        </FooterWrapper>
+                <Bookmark />
+                <MenuButton />
+            </NavMenuGrid>
+        </NavMenuWrapper>
     );
 };
 
-export default Footer;
+export default NavMenu;

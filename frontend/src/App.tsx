@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Slider from "./Components/Slider";
-import Footer from "./Components/Footer";
+import NavMenu from "./Components/NavMenu";
+import Menu from "./Components/Menu";
 import Login from "./Components/Login";
+import Category from "./Components/Category";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -13,13 +15,12 @@ const BodyWrapper = styled.div`
     background-image: radial-gradient(circle, black, rgb(1, 103, 187));
     background-image: -o-radial-gradient(circle, black, rgb(1, 103, 187));
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
-const App: React.FC = () => {
+const App: React.FC = (): JSX.Element => {
     return (
         <BrowserRouter>
             <BodyWrapper>
@@ -30,8 +31,16 @@ const App: React.FC = () => {
                     <Route exact path="/login">
                         <Login />
                     </Route>
+                    <Route exact path="/menu">
+                        <Menu />
+                    </Route>
+                    <Route
+                        exact
+                        path="/products/:category"
+                        component={Category}
+                    />
                 </Switch>
-                <Footer />
+                <NavMenu />
             </BodyWrapper>
         </BrowserRouter>
     );

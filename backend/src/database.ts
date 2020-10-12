@@ -25,7 +25,7 @@ const config: TConfig = {
     queueLimit: 0,
 };
 
-const database = mysql.createPool(config);
+const database: mysql.Pool = mysql.createPool(config);
 
 database.on("connection", () => {
     console.log("Connected to mysql");

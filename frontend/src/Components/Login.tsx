@@ -6,6 +6,7 @@ import {
     FormElement,
 } from "../Style/MainScreen";
 import Header from "./Header";
+import useNoResizeOnFocus from "../CustomHooks/NoResizeOnInput";
 
 interface TLogin {
     email: string;
@@ -14,6 +15,8 @@ interface TLogin {
 
 const Login: React.FC = () => {
     const [data, setData] = React.useState<TLogin>({ email: "", password: "" });
+
+    useNoResizeOnFocus();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
         const newData = {
