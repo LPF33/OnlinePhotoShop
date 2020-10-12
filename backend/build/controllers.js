@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCategoryProducts = exports.getCategory = void 0;
+exports.getSingleProduct = exports.getCategoryProducts = exports.getCategory = void 0;
 var database_1 = __importDefault(require("./database"));
 var getCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var result, err_1;
@@ -84,6 +84,29 @@ var getCategoryProducts = function (req, res) { return __awaiter(void 0, void 0,
     });
 }); };
 exports.getCategoryProducts = getCategoryProducts;
+var getSingleProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, category, id, result, err_3;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.params, category = _a.category, id = _a.id;
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, database_1.default.query("SELECT * FROM products where categories = ? AND id = ?;", [category, id])];
+            case 2:
+                result = (_b.sent())[0];
+                res.json({ success: true, result: result });
+                return [3 /*break*/, 4];
+            case 3:
+                err_3 = _b.sent();
+                res.json({ success: false, err: err_3 });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getSingleProduct = getSingleProduct;
 var postLogin = function (req, res) {
     var _a = req.params, name = _a.name, password = _a.password;
     res.send({ name: name, password: password });

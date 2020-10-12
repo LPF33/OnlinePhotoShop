@@ -5,7 +5,6 @@ import Slide from "./Slide";
 import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
 import SliderButton, { ButtonDirection } from "./SliderButton";
 import SliderDots from "./SliderDots";
-import Header from "./Header";
 
 import useDetectTouch from "../CustomHooks/DetectTouch";
 
@@ -125,7 +124,6 @@ const Slider: React.FC = () => {
 
     return (
         <MainScreenWrapper>
-            <Header />
             <SliderWrapper styleProps={slideWrapperProps}>
                 {slideState.imageArr.map((item, index) => (
                     <Slide image={item} key={index} />

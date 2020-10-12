@@ -1,24 +1,15 @@
 import * as React from "react";
 import axios from "axios";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
+import Rating from "./Rating";
+import { useDispatch } from "react-redux";
+import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 
-interface TCategoryItem {
-    id: number;
-    name: string;
-    image: string;
-    description: string;
-    brand: string;
-    category: string;
-    price: number;
-    stock: number;
-    rating: number;
-    numReviews: number;
-    categories: string;
-}
+import { CategoryWrapper, CategoryListItem } from "../Style/Category";
 
 interface TFetchCategoryItems {
     success: boolean;
-    result: TCategoryItem[];
+    result: TProductItem[];
 }
 
 type CategoryProps = {
@@ -29,7 +20,8 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
     match: { params },
 }) => {
     const [loading, setLoading] = React.useState<boolean>(true);
-    const [items, setItems] = React.useState<TCategoryItem[]>();
+    const [items, setItems] = React.useState<TProductItem[]>();
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
         (async () => {
@@ -47,6 +39,10 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
         })();
     }, [params]);
 
+    const fillCart = (item: TProductItem) => {
+        dispatch(updateCart(item, ECartUpdate.Increment));
+    };
+
     if (!items || items.length === 0) {
         return loading ? (
             <div>Loading</div>
@@ -55,15 +51,26 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
         );
     } else {
         return (
-            <div>
+            <CategoryWrapper>
                 {items.map((item) => {
                     return (
-                        <div key={item.id}>
-                            <div>{item.name}</div>
-                        </div>
+                        <CategoryListItem key={item.id}>
+                            <Link to={`/product/${item.categories}/${item.id}`}>
+                                <img src={item.image} />
+                                <div>{item.name}</div>
+                            </Link>
+                            {item.rating > 0 && <Rating rating={item.rating} />}
+                            <p>
+                                <em>{item.price}€</em>
+                                <i
+                                    className="fas fa-cart-plus"
+                                    onClick={() => fillCart(item)}
+                                ></i>
+                            </p>
+                        </CategoryListItem>
                     );
                 })}
-            </div>
+            </CategoryWrapper>
         );
     }
 };

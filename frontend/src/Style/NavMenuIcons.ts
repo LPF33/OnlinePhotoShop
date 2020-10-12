@@ -37,38 +37,46 @@ export const Icon = styled.i`
 `;
 
 export const CartCounter = styled.div`
-    position: relative;
-    top: 10px;
-    left: 10px;
-    font-size: 1.6rem;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1rem;
     color: white;
+    background-color: red;
+    padding: 2px 5px;
+    line-height: 1;
+    border-radius: 2px 2px 50% 50%;
 
     @media screen and (min-width: 768px) {
-        left: 20px;
+        font-size: 1.7rem;
     }
+
     @media screen and (min-width: 1440px) {
         font-size: 2rem;
-        left: 30px;
     }
 `;
 
 export const MenuWrapper = styled.div`
     position: absolute;
-    top: 0;
+    top: 8vh;
     left: 0;
     width: 100%;
-    min-height: 100%;
+    height: calc(82vh);
     background-color: rgb(0, 0, 0, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px;
     border: 10px solid black;
+    border-top: 0;
     overflow: auto;
 `;
 
 export const MenuListItem = styled(Link)`
-    max-width: 100%;
+    width: 50%;
+    max-width: 300px;
     font-size: 1.5rem;
     text-align: center;
     color: white;

@@ -34,9 +34,24 @@ const getCategoryProducts = async (
     }
 };
 
+const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
+    const { category, id } = req.params;
+    try {
+        const [
+            result,
+        ] = await database.query(
+            "SELECT * FROM products where categories = ? AND id = ?;",
+            [category, id]
+        );
+        res.json({ success: true, result });
+    } catch (err) {
+        res.json({ success: false, err });
+    }
+};
+
 const postLogin = (req: Request, res: Response): void => {
     const { name, password } = req.params;
     res.send({ name, password });
 };
 
-export { getCategory, getCategoryProducts };
+export { getCategory, getCategoryProducts, getSingleProduct };

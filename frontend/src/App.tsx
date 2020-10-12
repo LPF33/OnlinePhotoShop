@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import Header from "./Components/Header";
 import Slider from "./Components/Slider";
 import NavMenu from "./Components/NavMenu";
 import Menu from "./Components/Menu";
 import Login from "./Components/Login";
 import Category from "./Components/Category";
+import Product from "./Components/Product";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -24,6 +26,7 @@ const App: React.FC = (): JSX.Element => {
     return (
         <BrowserRouter>
             <BodyWrapper>
+                <Header />
                 <Switch>
                     <Route exact path="/">
                         <Slider />
@@ -38,6 +41,11 @@ const App: React.FC = (): JSX.Element => {
                         exact
                         path="/products/:category"
                         component={Category}
+                    />
+                    <Route
+                        exact
+                        path="/product/:category/:id"
+                        component={Product}
                     />
                 </Switch>
                 <NavMenu />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IconWrapper, Icon } from "../Style/FooterIcons";
+import { IconWrapper, Icon } from "../Style/NavMenuIcons";
 
 const PictureMenu: React.FC = () => {
     return (

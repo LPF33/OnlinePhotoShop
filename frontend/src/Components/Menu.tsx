@@ -4,27 +4,24 @@ import {
     Icon,
     MenuWrapper,
     MenuListItem,
-} from "../Style/FooterIcons";
-import { Link } from "react-router-dom";
+} from "../Style/NavMenuIcons";
+import { Link, useLocation } from "react-router-dom";
 
-import { connect } from "react-redux";
-import { fetchCategories } from "../actions/action";
-import { TFetchCategory } from "../actions/types";
-import { StoreState } from "../reducers/index";
-
-interface MenuProps {
-    categories: TFetchCategory;
-    fetchCategories(): any;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../Redux/actions/action";
+import { TFetchCategory } from "../Redux/actions/types";
+import { StoreState } from "../Redux/reducers/index";
 
 export const MenuButton: React.FC = () => {
-    const [show, setShow] = React.useState<boolean>(false);
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchCategories());
+    }, []);
 
     return (
-        <Link
-            to={show ? "/menu" : "/"}
-            onClick={() => setShow((prev) => !prev)}
-        >
+        <Link to={location.pathname !== "/menu" ? "/menu" : "/"}>
             <IconWrapper>
                 <Icon className="fas fa-bars"></Icon>
             </IconWrapper>
@@ -32,10 +29,10 @@ export const MenuButton: React.FC = () => {
     );
 };
 
-const _Menu: React.FC<MenuProps> = ({ categories, fetchCategories }) => {
-    React.useEffect(() => {
-        fetchCategories();
-    }, []);
+export const Menu: React.FC = () => {
+    const categories: TFetchCategory = useSelector(
+        (state: StoreState) => state.categories
+    );
 
     return (
         <MenuWrapper>
@@ -49,11 +46,4 @@ const _Menu: React.FC<MenuProps> = ({ categories, fetchCategories }) => {
     );
 };
 
-const mapStateToProps = ({
-    categories,
-}: StoreState): { categories: TFetchCategory } => {
-    return { categories };
-};
-
-const Menu = connect(mapStateToProps, { fetchCategories })(_Menu);
 export default Menu;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IconLinkWrapper, Icon } from "../Style/FooterIcons";
+import { IconLinkWrapper, Icon } from "../Style/NavMenuIcons";
 
 const User: React.FC = () => {
     return (

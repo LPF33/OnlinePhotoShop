@@ -13,5 +13,6 @@ export interface FetchCategoryAction {
 }
 
 export enum ActionTypes {
-    fetchCategory = "Fetch_Category",
+    fetchCategory,
+    updateCart,
 }
