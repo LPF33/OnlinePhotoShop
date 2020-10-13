@@ -9,6 +9,7 @@ import Menu from "./Components/Menu";
 import Login from "./Components/Login";
 import Category from "./Components/Category";
 import Product from "./Components/Product";
+import Cart from "./Components/Cart";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -47,6 +48,7 @@ const App: React.FC = (): JSX.Element => {
                         path="/product/:category/:id"
                         component={Product}
                     />
+                    <Route exact path="/mybasket" component={Cart} />
                 </Switch>
                 <NavMenu />
             </BodyWrapper>

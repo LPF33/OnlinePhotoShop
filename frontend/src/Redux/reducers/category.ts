@@ -1,8 +1,4 @@
-import {
-    TFetchCategory,
-    FetchCategoryAction,
-    ActionTypes,
-} from "../actions/types";
+import { TFetchCategory, FetchCategoryAction } from "../actions/category";
 
 export const initialCategoryState = {
     success: false,
@@ -14,7 +10,7 @@ export const categoryReducer = (
     action: FetchCategoryAction
 ) => {
     switch (action.type) {
-        case ActionTypes.fetchCategory:
+        case "fetchCategory":
             return action.payload;
         default:
             return state;

@@ -58,6 +58,32 @@ export const CartCounter = styled.div`
     }
 `;
 
+export const AddCartInfo = styled(Link)`
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90vw;
+    max-width: 400px;
+    height: 50px;
+    background-color: rgb(165, 110, 110, 0.85);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    & > i:first-child {
+        margin-right: 10px;
+    }
+
+    & > i {
+        margin-left: 5px;
+    }
+`;
+
 export const MenuWrapper = styled.div`
     position: absolute;
     top: 8vh;

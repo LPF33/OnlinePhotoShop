@@ -8,8 +8,8 @@ import {
 import { Link, useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../Redux/actions/action";
-import { TFetchCategory } from "../Redux/actions/types";
+import { fetchCategories } from "../Redux/actions/category";
+import { TFetchCategory } from "../Redux/actions/category";
 import { StoreState } from "../Redux/reducers/index";
 
 export const MenuButton: React.FC = () => {

@@ -4,7 +4,7 @@ import CartIcon from "./CartIcon";
 import User from "./User";
 import { MenuButton } from "./Menu";
 import Bookmark from "./Bookmark";
-import PictureMenu from "./PictureMenu";
+import SearchMenu from "./SearchMenu";
 
 const NavMenuWrapper = styled.nav`
     position: absolute;
@@ -30,7 +30,7 @@ const NavMenu: React.FC = () => {
         <NavMenuWrapper>
             <NavMenuGrid>
                 <User />
-                <PictureMenu />
+                <SearchMenu />
                 <CartIcon />
                 <Bookmark />
                 <MenuButton />

@@ -55,9 +55,9 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
                     <img src={item[0].image} />
                     <section>
                         <h3>{item[0].name}</h3>
-                        <h5>Marke: {item[0].brand}</h5>
+                        <h5>Brand: {item[0].brand}</h5>
                         <h4>{item[0].price}€</h4>
-                        <aside>Auf Lager: {item[0].stock}</aside>
+                        <aside>In stock: {item[0].stock}</aside>
                         <Rating rating={item[0].rating} />
                         <i
                             className="fas fa-cart-plus"
