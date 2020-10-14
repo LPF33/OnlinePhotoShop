@@ -2,11 +2,9 @@ import * as React from "react";
 import { AddressWrapper, AddressForm, Next } from "../Style/Address";
 import { EnumAddress, useVerifyAddress } from "../CustomHooks/VerifyAddress";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { EActionAddress, setSecondAddress } from "../Redux/actions/address";
+import { EActionAddress } from "../Redux/actions/address";
 
-const Shipping: React.FC = () => {
-    const dispatch = useDispatch();
+const BillingAddress: React.FC = () => {
     const history = useHistory();
 
     const [complete, setComplete] = React.useState<boolean>(false);
@@ -17,16 +15,14 @@ const Shipping: React.FC = () => {
         addressState,
         secondAddress,
         checkCompleteness,
-    } = useVerifyAddress(EActionAddress.Shipping);
+    } = useVerifyAddress(EActionAddress.Billing);
 
     const nextPage = (): void => {
         setComplete(checkCompleteness());
     };
 
     React.useEffect(() => {
-        if (complete && secondAddress) {
-            history.push("/billingaddress");
-        } else if (complete && !secondAddress) {
+        if (complete) {
             history.push("/billing");
         }
     }, [complete]);
@@ -34,7 +30,7 @@ const Shipping: React.FC = () => {
     return (
         <AddressWrapper>
             <AddressForm>
-                <h3>Shipping Address</h3>
+                <h3>Billing Address</h3>
                 <label>Your last name</label>
                 {error.lastname && <span>{error.lastname}</span>}
                 <input
@@ -95,28 +91,6 @@ const Shipping: React.FC = () => {
                     onChange={handleChange}
                     className={error.city ? "empty" : ""}
                 />
-                <label>Your email:</label>
-                {error.email && <span>{error.email}</span>}
-                <input
-                    type="text"
-                    autoComplete="off"
-                    name={EnumAddress.email}
-                    value={addressState.email}
-                    onChange={handleChange}
-                    className={error.email ? "empty" : ""}
-                />
-
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={secondAddress}
-                        onChange={() => {
-                            const val: boolean = !secondAddress;
-                            dispatch(setSecondAddress(val));
-                        }}
-                    />
-                    <label>I have a different billing address</label>
-                </div>
             </AddressForm>
             <Next type="button" onClick={nextPage}>
                 Next <i className="fas fa-chevron-right"></i>
@@ -125,4 +99,4 @@ const Shipping: React.FC = () => {
     );
 };
 
-export default Shipping;
+export default BillingAddress;

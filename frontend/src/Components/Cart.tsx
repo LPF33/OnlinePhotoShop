@@ -4,7 +4,7 @@ import {
     CartItemsWrappper,
     CartNextStep,
     CartItem,
-} from "../Style/CheckoutProcess";
+} from "../Style/cart";
 import { useSelector } from "react-redux";
 import { StoreState } from "../Redux/reducers/index";
 import { TCartState } from "../Redux/reducers/cart";

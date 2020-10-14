@@ -10,6 +10,8 @@ import Login from "./Components/Login";
 import Category from "./Components/Category";
 import Product from "./Components/Product";
 import Cart from "./Components/Cart";
+import Shipping from "./Components/Shipping";
+import BillingAddress from "./Components/BillingAddress";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -49,6 +51,12 @@ const App: React.FC = (): JSX.Element => {
                         component={Product}
                     />
                     <Route exact path="/mybasket" component={Cart} />
+                    <Route exact path="/shipping" component={Shipping} />
+                    <Route
+                        exact
+                        path="/billingaddress"
+                        component={BillingAddress}
+                    />
                 </Switch>
                 <NavMenu />
             </BodyWrapper>

@@ -2,7 +2,7 @@ import * as TAddress from "../actions/address";
 
 export interface TAddressState {
     shipping: TAddress.TShippingAddress;
-    billing: TAddress.TBillingAddress | null;
+    billing: TAddress.TBillingAddress;
     secondAddress: boolean;
 }
 
@@ -16,7 +16,14 @@ const initialState: TAddressState = {
         city: "",
         email: "",
     },
-    billing: null,
+    billing: {
+        lastname: "",
+        firstname: "",
+        streetname: "",
+        streetnumber: "",
+        postalcode: "",
+        city: "",
+    },
     secondAddress: false,
 };
 
