@@ -23,7 +23,7 @@ const BillingAddress: React.FC = () => {
 
     React.useEffect(() => {
         if (complete) {
-            history.push("/billing");
+            history.push("/payment");
         }
     }, [complete]);
 

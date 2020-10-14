@@ -4,6 +4,8 @@ export interface TAddressState {
     shipping: TAddress.TShippingAddress;
     billing: TAddress.TBillingAddress;
     secondAddress: boolean;
+    hasAddress: boolean;
+    paymentMethod: TAddress.EPaymentMethod | null;
 }
 
 const initialState: TAddressState = {
@@ -25,6 +27,8 @@ const initialState: TAddressState = {
         city: "",
     },
     secondAddress: false,
+    hasAddress: false,
+    paymentMethod: null,
 };
 
 export const addressReducer = (
@@ -33,6 +37,8 @@ export const addressReducer = (
         | TAddress.TSetShippingAddress
         | TAddress.TSetBillingAddress
         | TAddress.TSetSecondAddress
+        | TAddress.TSetHasAddress
+        | TAddress.TSetPaymentMethod
 ) => {
     const newState = { ...state };
     switch (action.type) {
@@ -44,6 +50,15 @@ export const addressReducer = (
             break;
         case TAddress.EActionAddress.SecondAddress:
             newState.secondAddress = action.payload;
+            break;
+        case TAddress.EActionAddress.HasAddress:
+            newState.hasAddress = action.payload;
+            break;
+        case TAddress.EActionAddress.Payment:
+            newState.paymentMethod = action.payload;
+            localStorage.setItem("address", JSON.stringify(newState));
+            break;
+        default:
             break;
     }
 

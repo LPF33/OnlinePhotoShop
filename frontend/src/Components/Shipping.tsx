@@ -27,7 +27,7 @@ const Shipping: React.FC = () => {
         if (complete && secondAddress) {
             history.push("/billingaddress");
         } else if (complete && !secondAddress) {
-            history.push("/billing");
+            history.push("/payment");
         }
     }, [complete]);
 

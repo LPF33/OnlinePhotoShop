@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Header from "./Components/Header";
 import Slider from "./Components/Slider";
@@ -12,6 +12,8 @@ import Product from "./Components/Product";
 import Cart from "./Components/Cart";
 import Shipping from "./Components/Shipping";
 import BillingAddress from "./Components/BillingAddress";
+import Payment from "./Components/Payment";
+import Order from "./Components/Order";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -57,6 +59,9 @@ const App: React.FC = (): JSX.Element => {
                         path="/billingaddress"
                         component={BillingAddress}
                     />
+                    <Route exact path="/payment" component={Payment} />
+                    <Route exact path="/order" component={Order} />
+                    <Route render={() => <Redirect to="/" />}></Route>
                 </Switch>
                 <NavMenu />
             </BodyWrapper>

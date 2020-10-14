@@ -5,6 +5,7 @@ import {
     TBillingAddress,
     setShippingAddress,
     setBillingAddress,
+    setHasAddress,
 } from "../Redux/actions/address";
 import { useSelector, useDispatch } from "react-redux";
 import { StoreState } from "../Redux/reducers/index";
@@ -157,9 +158,11 @@ export function useVerifyAddress(
                     addressState.shipping
                 )) {
                     if (!validateInput(name, value)) {
+                        dispatch(setHasAddress(false));
                         return false;
                     }
                 }
+                dispatch(setHasAddress(true));
                 return true;
 
             case EActionAddress.Billing:

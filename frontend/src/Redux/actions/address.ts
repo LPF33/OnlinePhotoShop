@@ -10,10 +10,16 @@ export interface TShippingAddress {
 
 export type TBillingAddress = Omit<TShippingAddress, "email">;
 
+export enum EPaymentMethod {
+    Paypal = "Paypal",
+}
+
 export enum EActionAddress {
     Shipping,
     Billing,
     SecondAddress,
+    HasAddress,
+    Payment,
 }
 
 export interface TSetShippingAddress {
@@ -52,6 +58,30 @@ export interface TSetSecondAddress {
 export function setSecondAddress(value: boolean): TSetSecondAddress {
     return {
         type: EActionAddress.SecondAddress,
+        payload: value,
+    };
+}
+
+export interface TSetHasAddress {
+    type: EActionAddress.HasAddress;
+    payload: boolean;
+}
+
+export function setHasAddress(value: boolean): TSetHasAddress {
+    return {
+        type: EActionAddress.HasAddress,
+        payload: value,
+    };
+}
+
+export interface TSetPaymentMethod {
+    type: EActionAddress.Payment;
+    payload: EPaymentMethod;
+}
+
+export function setPaymentMethod(value: EPaymentMethod): TSetPaymentMethod {
+    return {
+        type: EActionAddress.Payment,
         payload: value,
     };
 }
