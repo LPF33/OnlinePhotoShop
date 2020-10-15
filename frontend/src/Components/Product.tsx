@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
 import Rating from "./Rating";
+import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../Redux/actions/category";
@@ -59,7 +60,7 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
     };
 
     if (!item || item.length === 0) {
-        return loading ? <div>Loading</div> : <div>No Product found!</div>;
+        return loading ? <Loading /> : <div>No Product found!</div>;
     } else {
         return (
             <ProductWrapper>

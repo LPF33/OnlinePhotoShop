@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 
 import { CategoryWrapper, CategoryListItem } from "../Style/Category";
+import Loading from "./Loading";
 
 export interface TFetchCategoryItems {
     success: boolean;
@@ -44,11 +45,7 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
     };
 
     if (!items || items.length === 0) {
-        return loading ? (
-            <div>Loading</div>
-        ) : (
-            <div>No items in this category</div>
-        );
+        return loading ? <Loading /> : <div>No items in this category</div>;
     } else {
         return (
             <CategoryWrapper>

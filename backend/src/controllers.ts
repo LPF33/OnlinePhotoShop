@@ -67,17 +67,22 @@ const getSearchProducts = async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    let { search } = req.params;
+    let { search, startId } = req.params;
+    let id: number = 0;
+    if (startId) {
+        id = parseInt(startId);
+    }
     if (search === "all") {
         search = "";
+        id = 0;
     }
 
     try {
         const [
             result,
         ] = await database.query(
-            "SELECT * FROM products WHERE LOWER(name) LIKE ? OR LOWER(categories) LIKE ? OR LOWER(brand) LIKE ?;",
-            ["%" + search + "%", "%" + search + "%", "%" + search + "%"]
+            "SELECT * FROM products WHERE (LOWER(name) LIKE ? OR LOWER(categories) LIKE ? OR LOWER(brand) LIKE ?) AND id > ?  ORDER BY id ASC;",
+            ["%" + search + "%", "%" + search + "%", "%" + search + "%", id]
         );
         if (Array.isArray(result) && result.length > 0) {
             res.json({ success: true, result });

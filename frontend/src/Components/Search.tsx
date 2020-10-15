@@ -2,11 +2,12 @@ import * as React from "react";
 import axios from "axios";
 import { RouteComponentProps, Link } from "react-router-dom";
 import Rating from "./Rating";
+import Loading from "./Loading";
 import { useDispatch } from "react-redux";
 import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 import { TFetchCategoryItems } from "./Category";
-import { SearchBar } from "../Style/Search";
-import { CategoryWrapper, CategoryListItem } from "../Style/Category";
+import { SearchBar, SearchWrapper } from "../Style/Search";
+import { CategoryListItem } from "../Style/Category";
 
 type TSearchProps = {
     search: string;
@@ -18,6 +19,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
     const { search } = params;
 
     const dispatch = useDispatch();
+    const elemRef = React.useRef<HTMLDivElement>(null)!;
 
     const [result, setSearch] = React.useState<TProductItem[] | null>(null);
     const [inputText, setInputText] = React.useState<string>(search);
@@ -53,8 +55,18 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
+    const scroll = () => {
+        if (elemRef.current) {
+            const scrollHeight =
+                elemRef.current.getBoundingClientRect().height +
+                elemRef.current.scrollTop;
+            const screenHeight = elemRef.current.scrollHeight;
+            console.log(screenHeight - 300 <= scrollHeight);
+        }
+    };
+
     return (
-        <CategoryWrapper>
+        <SearchWrapper ref={elemRef} onScroll={scroll}>
             <SearchBar
                 type="text"
                 placeholder="Search for product"
@@ -82,7 +94,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                         </CategoryListItem>
                     );
                 })}
-        </CategoryWrapper>
+        </SearchWrapper>
     );
 };
 

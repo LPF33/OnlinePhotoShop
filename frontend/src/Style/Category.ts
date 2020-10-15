@@ -77,9 +77,8 @@ export const ProductWrapper = styled.div`
     background-color: rgb(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;    
     border: 10px solid black;
     border-top: 0;
@@ -147,6 +146,9 @@ export const ProductWrapper = styled.div`
 
     @media screen and (min-width: 768px) {
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
         & > div:first-child {
             display: flex;
             flex-direction: row;
