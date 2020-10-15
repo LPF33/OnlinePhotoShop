@@ -7,7 +7,7 @@ import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 
 import { CategoryWrapper, CategoryListItem } from "../Style/Category";
 
-interface TFetchCategoryItems {
+export interface TFetchCategoryItems {
     success: boolean;
     result: TProductItem[];
 }

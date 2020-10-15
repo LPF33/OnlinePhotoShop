@@ -5,7 +5,7 @@ export const CategoryWrapper = styled.div`
     top: 8vh;
     left: 0;
     width: 100%;
-    height: calc(82vh);
+    height: 82vh;
     background-color: rgb(0, 0, 0, 0.5);
     display: flex;
     flex-wrap: wrap;
@@ -19,6 +19,7 @@ export const CategoryWrapper = styled.div`
 export const CategoryListItem = styled.article`
     width: 50%;
     max-width: 300px;
+    max-height: 70vh;
     font-size: 1.5rem;
     text-align: center;
     color: white;
@@ -75,6 +76,7 @@ export const ProductWrapper = styled.div`
     height: calc(82vh);
     background-color: rgb(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -123,6 +125,19 @@ export const ProductWrapper = styled.div`
 
     &>div:nth-child(2){
         margin-top: 10px;
+        display: block;
+
+        &>button{
+            margin-top: 5px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            &:hover{
+                background-color: yellow;
+            }
+        }
+
         &>aside{
             margin-top: 5px;
             border-top: 0.5px solid white;
@@ -131,6 +146,7 @@ export const ProductWrapper = styled.div`
     }
 
     @media screen and (min-width: 768px) {
+        flex-direction: column;
         & > div:first-child {
             display: flex;
             flex-direction: row;
@@ -145,5 +161,15 @@ export const ProductWrapper = styled.div`
             & >section{
                 order: 2;
             }
+    }
+`;
+
+export const RemoveItemWishlist = styled.button`
+    font-size: 1.3rem;
+    color: red;
+    cursor: pointer;
+
+    &:hover {
+        color: yellow;
     }
 `;

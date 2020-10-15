@@ -14,6 +14,8 @@ import Shipping from "./Components/Shipping";
 import BillingAddress from "./Components/BillingAddress";
 import Payment from "./Components/Payment";
 import Order from "./Components/Order";
+import Search from "./Components/Search";
+import Wishlist from "./Components/Wishlist";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -61,6 +63,8 @@ const App: React.FC = (): JSX.Element => {
                     />
                     <Route exact path="/payment" component={Payment} />
                     <Route exact path="/order" component={Order} />
+                    <Route exact path="/search/:id" component={Search} />
+                    <Route exact path="/wishlist" component={Wishlist} />
                     <Route render={() => <Redirect to="/" />}></Route>
                 </Switch>
                 <NavMenu />

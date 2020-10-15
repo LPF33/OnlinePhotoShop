@@ -10,7 +10,7 @@ node_modules
 
 # production
 /build
-/frontend/public/sliderImages
+backend/build
 
 # misc
 .DS_Store

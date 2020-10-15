@@ -1,23 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
+import { TImages } from "./Slider";
+import Rating from "./Rating";
 
-const Image = styled.img`
+const Figure = styled.figure`
     position: relative;
     min-width: 80vh;
     height: 80vh;
-    object-fit: cover;
 `;
 
-type TProps = {
-    image: string;
-};
+const Image = styled.img`
+    position: relative;
+    min-width: 60vh;
+    height: 60vh;
+    object-fit: contain;
+`;
 
-const Slide: React.FC<TProps> = ({ image }) => {
+interface TProps {
+    foto: TImages;
+}
+
+const Slide: React.FC<TProps> = ({ foto }) => {
     return (
-        <Image
-            alt="picture"
-            src={require(`../images/sliderImages/${image}.PNG`)}
-        />
+        <Figure>
+            <Image alt={foto.name} src={foto.image} />
+            <figcaption>
+                {foto.name} <Rating rating={foto.rating} />
+            </figcaption>
+        </Figure>
     );
 };
 

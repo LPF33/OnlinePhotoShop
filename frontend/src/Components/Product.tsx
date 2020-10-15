@@ -2,9 +2,10 @@ import * as React from "react";
 import axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
 import Rating from "./Rating";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
-
+import { addToWishlist, removeFromWishlist } from "../Redux/actions/category";
+import { StoreState } from "../Redux/reducers/index";
 import { ProductWrapper } from "../Style/Category";
 
 interface TProductProps {
@@ -22,6 +23,17 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
 }) => {
     const { category, id } = params;
     const dispatch = useDispatch();
+
+    const onWishlist: boolean = useSelector((state: StoreState) => {
+        const index = state.categories.wishlist.findIndex(
+            (item) => item.id === parseInt(id)
+        );
+        if (index === -1) {
+            return false;
+        } else {
+            return true;
+        }
+    });
 
     const [loading, setLoading] = React.useState<boolean>(true);
     const [item, setItem] = React.useState<TProductItem[]>();
@@ -67,6 +79,23 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
                 </div>
                 <div>
                     <p>{item[0].description}</p>
+                    {!onWishlist && (
+                        <button
+                            onClick={() => dispatch(addToWishlist(item[0]))}
+                        >
+                            <i className="far fa-bookmark"></i> Add to wishlist
+                        </button>
+                    )}
+                    {onWishlist && (
+                        <button
+                            onClick={() =>
+                                dispatch(removeFromWishlist(item[0].id))
+                            }
+                        >
+                            <i className="far fa-bookmark"></i> Remove from
+                            wishlist
+                        </button>
+                    )}
                     <aside>{item[0].numReviews} Reviews</aside>
                     <aside>Kategorie: {item[0].category}</aside>
                 </div>

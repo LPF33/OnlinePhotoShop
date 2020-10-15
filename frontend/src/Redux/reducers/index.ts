@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import { categoryReducer } from "./category";
 import { cartReducer, TCartState } from "./cart";
-import { TFetchCategory } from "../actions/category";
+import { TCategoryState } from "../reducers/category";
 import { addressReducer, TAddressState } from "./address";
 
 export interface StoreState {
-    categories: TFetchCategory;
+    categories: TCategoryState;
     cart: TCartState;
     address: TAddressState;
 }

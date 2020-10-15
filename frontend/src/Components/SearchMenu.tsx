@@ -1,11 +1,11 @@
 import * as React from "react";
-import { IconWrapper, Icon } from "../Style/NavMenuIcons";
+import { IconLinkWrapper, Icon } from "../Style/NavMenuIcons";
 
 const SearchMenu: React.FC = () => {
     return (
-        <IconWrapper>
+        <IconLinkWrapper to="/search/all">
             <Icon className="fas fa-search"></Icon>
-        </IconWrapper>
+        </IconLinkWrapper>
     );
 };
 

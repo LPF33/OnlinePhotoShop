@@ -36,6 +36,13 @@ export const Menu: React.FC = () => {
 
     return (
         <MenuWrapper>
+            <MenuListItem key="allproducts" to="/search/all">
+                <img
+                    src="https://assets.mmsrg.com/isr/166325/c1/-/pixelboxx-mss-72065033/fee_786_587_png"
+                    alt="showallproducts"
+                />
+                All products
+            </MenuListItem>
             {categories.result.map((item, index) => (
                 <MenuListItem key={index} to={`/products/${item.categories}`}>
                     <img src={item.image} alt={item.category} />

@@ -16,6 +16,20 @@ const getCategory = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+const getBestRatedProducts = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    try {
+        const [result] = await database.query(
+            "SELECT name, image, rating FROM products ORDER BY rating DESC LIMIT 5;"
+        );
+        res.json({ success: true, result });
+    } catch (err) {
+        res.json({ success: false, err });
+    }
+};
+
 const getCategoryProducts = async (
     req: Request,
     res: Response
@@ -49,9 +63,36 @@ const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const postLogin = (req: Request, res: Response): void => {
-    const { name, password } = req.params;
-    res.send({ name, password });
+const getSearchProducts = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    let { search } = req.params;
+    if (search === "all") {
+        search = "";
+    }
+
+    try {
+        const [
+            result,
+        ] = await database.query(
+            "SELECT * FROM products WHERE LOWER(name) LIKE ? OR LOWER(categories) LIKE ? OR LOWER(brand) LIKE ?;",
+            ["%" + search + "%", "%" + search + "%", "%" + search + "%"]
+        );
+        if (Array.isArray(result) && result.length > 0) {
+            res.json({ success: true, result });
+        } else {
+            res.json({ success: false, result });
+        }
+    } catch (err) {
+        res.json({ success: false, err });
+    }
 };
 
-export { getCategory, getCategoryProducts, getSingleProduct };
+export {
+    getCategory,
+    getCategoryProducts,
+    getSingleProduct,
+    getBestRatedProducts,
+    getSearchProducts,
+};

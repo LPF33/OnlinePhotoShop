@@ -116,7 +116,7 @@ export function useVerifyAddress(
             }
         }
 
-        return true;
+        return false;
     };
 
     const addressState: TAddressState = useSelector((state: StoreState) => {

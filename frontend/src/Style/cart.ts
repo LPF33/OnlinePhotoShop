@@ -5,7 +5,7 @@ export const CartWrapper = styled.div`
     top: 8vh;
     left: 0;
     width: 100%;
-    height: calc(82vh);
+    height: 82vh;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -18,16 +18,22 @@ export const CartWrapper = styled.div`
 `;
 
 export const CartItemsWrappper = styled.div`
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    align-content: flex-start;
     flex-wrap: wrap;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90vw;
     height: calc(100% - 14vh);
     color: white;
     overflow: auto;
 
     @media screen and (min-width: 768px) {
+        position: static;
+        transform: translateX(0%);
         width: calc(100vw - 320px);
         height: 100%;
     }
@@ -113,14 +119,16 @@ export const CartNextStep = styled.div`
 
 export const CartItem = styled.div`
     display: flex;
+    justify-content: space-evenly;
     background-color: rgb(255, 255, 255, 0.4);
     padding: 10px;
     border-radius: 10px;
     margin: 5px;
-    max-width: 100%;
+    width: 90vw;
 
     & > img {
         width: 100px;
+        object-fit: contain;
     }
 
     & > section {
@@ -155,5 +163,9 @@ export const CartItem = styled.div`
                 }
             }
         }
+    }
+
+    @media screen and (min-width: 768px) {
+        width: 300px;
     }
 `;

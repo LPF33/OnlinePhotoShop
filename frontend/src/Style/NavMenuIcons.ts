@@ -23,6 +23,10 @@ export const IconLinkWrapper = styled(Link)`
     &:hover {
         background-color: rgb(165, 110, 110);
     }
+
+    .active {
+        color: rgb(253, 255, 137);
+    }
 `;
 
 export const Icon = styled.i`

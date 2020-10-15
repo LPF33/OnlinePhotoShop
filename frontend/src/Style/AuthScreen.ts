@@ -3,29 +3,18 @@ import { Link } from "react-router-dom";
 
 export const MainScreenWrapper = styled.div`
     position: absolute;
-    top: calc(50% - 5vh);
-    width: 80vh;
-    height: 80vh;
-    transform: translateY(-50%);
-    overflow: hidden;
-    border-radius: 50%;
-    display: flex;
-
-    @media screen and (min-width: 768px) {
-        width: 80vw;
-        border-radius: 10px;
-    }
-`;
-
-export const MainFlex = styled.div`
-    position: relative;
+    top: 8vh;
+    left: 0;
+    width: 100%;
+    height: 82vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
-    width: 100%;
-    height: calc(100% - 10vh);
-    background-color: rgb(0, 0, 0, 0.3);
+    justify-content: center;
+    padding: 10px;
+    border: 10px solid black;
+    border-top: 0;
+    overflow: auto;
 `;
 
 export const FormElement = styled.form`
@@ -55,12 +44,14 @@ export const FormElement = styled.form`
 `;
 
 export const MainGoLink = styled(Link)`
-    position: absolute;
-    bottom: 0;
     background-color: rgb(1, 103, 187);
     color: white;
     text-align: center;
     font-size: 1.2rem;
     height: 10%;
     width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

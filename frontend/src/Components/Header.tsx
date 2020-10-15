@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -78,7 +78,9 @@ const Header: React.FC = () => {
     return (
         <CompanyName>
             {location.pathname === "/" ? (
-                <Title>ShopiHolic</Title>
+                <Link to="/">
+                    <Title>ShopiHolic</Title>
+                </Link>
             ) : (
                 <>
                     <Location>
@@ -93,7 +95,9 @@ const Header: React.FC = () => {
                                 </li>
                             ))}
                     </Location>
-                    <TitleRight>ShopiHolic</TitleRight>
+                    <Link to="/">
+                        <TitleRight>ShopiHolic</TitleRight>
+                    </Link>
                 </>
             )}
         </CompanyName>

@@ -2,10 +2,8 @@ import * as React from "react";
 import {
     MainScreenWrapper,
     MainGoLink,
-    MainFlex,
     FormElement,
-} from "../Style/MainScreen";
-import Header from "./Header";
+} from "../Style/AuthScreen";
 import useNoResizeOnFocus from "../CustomHooks/NoResizeOnInput";
 
 interface TLogin {
@@ -28,36 +26,33 @@ const Login: React.FC = () => {
 
     return (
         <MainScreenWrapper>
-            <Header />
-            <MainFlex>
-                <FormElement>
-                    <h1>
-                        LOGIN <i className="fas fa-sign-in-alt"></i>
-                    </h1>
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="Your email"
-                        onChange={handleChange}
-                        value={data.email}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Your password"
-                        value={data.password}
-                        onChange={handleChange}
-                        autoComplete="off"
-                        // onKeyDown={(e) => {
-                        //     if (e.keyCode === 13) {
-                        //         handleSubmit(e);
-                        //     }
-                        // }}
-                    />
-                    <input type="submit" value="Login" />
-                </FormElement>
-                <MainGoLink to="/">No Account? Register today!</MainGoLink>
-            </MainFlex>
+            <FormElement>
+                <h1>
+                    LOGIN <i className="fas fa-sign-in-alt"></i>
+                </h1>
+                <input
+                    type="text"
+                    name="email"
+                    placeholder="Your email"
+                    onChange={handleChange}
+                    value={data.email}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Your password"
+                    value={data.password}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    // onKeyDown={(e) => {
+                    //     if (e.keyCode === 13) {
+                    //         handleSubmit(e);
+                    //     }
+                    // }}
+                />
+                <input type="submit" value="Login" />
+            </FormElement>
+            <MainGoLink to="/">No Account? Register today!</MainGoLink>
         </MainScreenWrapper>
     );
 };

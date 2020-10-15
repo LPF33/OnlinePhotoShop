@@ -5,7 +5,7 @@ export const PaymentWrapper = styled.div`
     top: 8vh;
     left: 0;
     width: 100%;
-    height: calc(82vh);
+    height: 82vh;
     display: flex;
     flex-direction: column;
     align-items: center;
