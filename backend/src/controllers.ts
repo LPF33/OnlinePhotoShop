@@ -22,7 +22,7 @@ const getBestRatedProducts = async (
 ): Promise<void> => {
     try {
         const [result] = await database.query(
-            "SELECT name, image, rating FROM products ORDER BY rating DESC LIMIT 5;"
+            "SELECT id, categories, name, image, rating FROM products ORDER BY rating DESC LIMIT 5;"
         );
         res.json({ success: true, result });
     } catch (err) {
@@ -74,7 +74,6 @@ const getSearchProducts = async (
     }
     if (search === "all") {
         search = "";
-        id = 0;
     }
 
     try {

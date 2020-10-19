@@ -26,7 +26,7 @@ export const cartReducer = (
     const newState: TCartState = { ...state };
 
     switch (action.type) {
-        case ECartUpdate.Increment:
+        case ECartUpdate.Increment: {
             const { id } = action.payload;
             const index: number = newState.products.findIndex(
                 (item) => item.id === id
@@ -37,26 +37,29 @@ export const cartReducer = (
                 newState.products.push({ ...action.payload, counter: 1 });
             }
             break;
-        case ECartUpdate.Decrement:
-            const { id: id2 } = action.payload;
-            const index2: number = newState.products.findIndex(
-                (item) => item.id === id2
+        }
+        case ECartUpdate.Decrement: {
+            const { id } = action.payload;
+            const index: number = newState.products.findIndex(
+                (item) => item.id === id
             );
-            if (index2 !== -1) {
-                if (newState.products[index2].counter <= 1) {
-                    newState.products.splice(index2, 1);
+            if (index !== -1) {
+                if (newState.products[index].counter <= 1) {
+                    newState.products.splice(index, 1);
                 } else {
-                    newState.products[index2].counter -= 1;
+                    newState.products[index].counter -= 1;
                 }
             }
             break;
-        case ECartUpdate.Remove:
-            const { id: id3 } = action.payload;
-            const index3: number = newState.products.findIndex(
-                (item) => item.id === id3
+        }
+        case ECartUpdate.Remove: {
+            const { id } = action.payload;
+            const index: number = newState.products.findIndex(
+                (item) => item.id === id
             );
-            newState.products.splice(index3, 1);
+            newState.products.splice(index, 1);
             break;
+        }
 
         default:
             break;

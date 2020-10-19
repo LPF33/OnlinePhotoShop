@@ -14,7 +14,7 @@ export const MainScreenWrapper = styled.div`
     padding: 10px;
     border: 10px solid black;
     border-top: 0;
-    overflow: auto;
+    overflow: hidden;
 `;
 
 export const FormElement = styled.form`

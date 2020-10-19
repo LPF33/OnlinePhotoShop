@@ -23,6 +23,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
 
     const [result, setSearch] = React.useState<TProductItem[] | null>(null);
     const [inputText, setInputText] = React.useState<string>(search);
+    const [loading, setLoading] = React.useState<boolean>(false);
 
     React.useEffect(() => {
         let ignore = false;
@@ -61,7 +62,8 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                 elemRef.current.getBoundingClientRect().height +
                 elemRef.current.scrollTop;
             const screenHeight = elemRef.current.scrollHeight;
-            console.log(screenHeight - 300 <= scrollHeight);
+            if (screenHeight - 250 <= scrollHeight) {
+            }
         }
     };
 
@@ -80,7 +82,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                     return (
                         <CategoryListItem key={item.id}>
                             <Link to={`/product/${item.categories}/${item.id}`}>
-                                <img src={item.image} />
+                                <img src={item.image} alt={item.name} />
                                 <div>{item.name}</div>
                             </Link>
                             {item.rating > 0 && <Rating rating={item.rating} />}
@@ -91,6 +93,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                                     onClick={() => fillCart(item)}
                                 ></i>
                             </p>
+                            {loading && <Loading />}
                         </CategoryListItem>
                     );
                 })}
