@@ -10,6 +10,7 @@ import {
     CategoryWrapper,
     CategoryListItem,
     RemoveItemWishlist,
+    WishlistNoItem,
 } from "../Style/Category";
 
 const Wishlist: React.FC = () => {
@@ -26,7 +27,7 @@ const Wishlist: React.FC = () => {
     return (
         <CategoryWrapper>
             {state.wishlist.length === 0 ? (
-                <div>No items in your wishlist</div>
+                <WishlistNoItem>No items in your wishlist</WishlistNoItem>
             ) : (
                 state.wishlist.map((item) => {
                     return (

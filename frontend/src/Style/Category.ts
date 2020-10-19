@@ -76,9 +76,7 @@ export const ProductWrapper = styled.div`
     height: calc(82vh);
     background-color: rgb(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
     padding: 10px;    
     border: 10px solid black;
     border-top: 0;
@@ -174,4 +172,8 @@ export const RemoveItemWishlist = styled.button`
     &:hover {
         color: yellow;
     }
+`;
+
+export const WishlistNoItem = styled.h1`
+    color: white;
 `;

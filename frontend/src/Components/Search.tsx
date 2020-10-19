@@ -6,12 +6,14 @@ import Loading from "./Loading";
 import { useDispatch } from "react-redux";
 import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
 import { TFetchCategoryItems } from "./Category";
-import { SearchBar, SearchWrapper } from "../Style/Search";
+import { SearchBar, SearchWrapper, NoSearch, More } from "../Style/Search";
 import { CategoryListItem } from "../Style/Category";
 
 type TSearchProps = {
     search: string;
 };
+
+type TResponse = { data: TFetchCategoryItems };
 
 const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
     match: { params },
@@ -20,16 +22,21 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
 
     const dispatch = useDispatch();
     const elemRef = React.useRef<HTMLDivElement>(null)!;
+    const ignoreAxios = React.useRef<boolean>(false);
 
-    const [result, setSearch] = React.useState<TProductItem[] | null>(null);
+    const [result, setSearch] = React.useState<TProductItem[]>([]);
     const [inputText, setInputText] = React.useState<string>(search);
-    const [loading, setLoading] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [noMoreProducts, setNoMore] = React.useState<boolean>(false);
+    const [scroll, setScroll] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        let ignore = false;
+        ignoreAxios.current = false;
+        setNoMore(false);
+        setScroll(false);
 
         (async () => {
-            let response;
+            let response: TResponse;
             if (!inputText) {
                 response = await axios.get<TFetchCategoryItems>(
                     `/api/searchproducts/all`
@@ -40,35 +47,85 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                 );
             }
 
-            if (!ignore && response.data.success) {
+            setLoading(false);
+            if (!ignoreAxios.current && response.data.success) {
                 setSearch(response.data.result);
             } else {
-                setSearch(null);
+                setSearch([]);
             }
         })();
 
         return () => {
-            ignore = true;
+            ignoreAxios.current = true;
         };
     }, [inputText]);
 
-    const fillCart = (item: TProductItem) => {
+    React.useEffect(() => {
+        if (elemRef.current) {
+            console.log(
+                elemRef.current.scrollHeight,
+                elemRef.current.clientHeight
+            );
+        }
+    });
+
+    const fillCart = (item: TProductItem): void => {
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
-    const scroll = () => {
+    const loadData = async (): Promise<void> => {
+        setLoading(true);
+        let response: TResponse;
+        if (!inputText) {
+            response = await axios.get<TFetchCategoryItems>(
+                `/api/searchproducts/all/${result[result.length - 1].id}`
+            );
+        } else {
+            response = await axios.get<TFetchCategoryItems>(
+                `/api/searchproducts/${inputText}/${
+                    result[result.length - 1].id
+                }`
+            );
+        }
+
+        setLoading(false);
+        if (
+            response.data.success &&
+            response.data.result &&
+            !ignoreAxios.current
+        ) {
+            setSearch((prev) => [...prev, ...response.data.result]);
+        } else {
+            setNoMore(true);
+        }
+    };
+
+    const scrollMore = () => {
         if (elemRef.current) {
+            setScroll(true);
             const scrollHeight =
                 elemRef.current.getBoundingClientRect().height +
                 elemRef.current.scrollTop;
             const screenHeight = elemRef.current.scrollHeight;
-            if (screenHeight - 250 <= scrollHeight) {
+            if (
+                screenHeight - 250 <= scrollHeight &&
+                !loading &&
+                result.length > 0 &&
+                !noMoreProducts
+            ) {
+                loadData();
             }
         }
     };
 
+    const getMoreData = () => {
+        if (!loading && result.length > 0 && !noMoreProducts) {
+            loadData();
+        }
+    };
+
     return (
-        <SearchWrapper ref={elemRef} onScroll={scroll}>
+        <SearchWrapper ref={elemRef} onScroll={scrollMore}>
             <SearchBar
                 type="text"
                 placeholder="Search for product"
@@ -77,7 +134,12 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                     setInputText(e.currentTarget.value)
                 }
             />
-            {result &&
+            {result.length === 0 && (
+                <NoSearch>
+                    No products found for <em>{inputText}</em> !
+                </NoSearch>
+            )}
+            {result.length > 0 &&
                 result.map((item) => {
                     return (
                         <CategoryListItem key={item.id}>
@@ -93,10 +155,16 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                                     onClick={() => fillCart(item)}
                                 ></i>
                             </p>
-                            {loading && <Loading />}
                         </CategoryListItem>
                     );
                 })}
+            {!noMoreProducts &&
+                result.length > 0 &&
+                !scroll &&
+                result.length % 10 === 0 && (
+                    <More onClick={getMoreData}>More</More>
+                )}
+            {loading && <Loading />}
         </SearchWrapper>
     );
 };

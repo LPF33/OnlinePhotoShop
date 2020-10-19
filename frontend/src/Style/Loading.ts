@@ -74,7 +74,7 @@ export const Text = styled.p`
     width: 90%;
     height: 90%;
     font-size: 1.5em;
-    font-weight: bold;
+    color: white;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;

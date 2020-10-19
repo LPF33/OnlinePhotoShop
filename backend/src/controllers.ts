@@ -80,7 +80,7 @@ const getSearchProducts = async (
         const [
             result,
         ] = await database.query(
-            "SELECT * FROM products WHERE (LOWER(name) LIKE ? OR LOWER(categories) LIKE ? OR LOWER(brand) LIKE ?) AND id > ?  ORDER BY id ASC;",
+            "SELECT * FROM products WHERE (LOWER(name) LIKE ? OR LOWER(categories) LIKE ? OR LOWER(brand) LIKE ?) AND id > ?  ORDER BY id ASC LIMIT 10;",
             ["%" + search + "%", "%" + search + "%", "%" + search + "%", id]
         );
         if (Array.isArray(result) && result.length > 0) {

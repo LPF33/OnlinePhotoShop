@@ -25,3 +25,25 @@ export const SearchBar = styled.input`
     height: 2.1rem;
     align-self: flex-start;
 `;
+
+export const NoSearch = styled.h1`
+    color: white;
+
+    & > em {
+        color: red;
+        margin-right: 2px;
+    }
+`;
+
+export const More = styled.button`
+    color: white;
+    display: block;
+    width: 100%;
+    font-size: 1.5rem;
+    border: 2px solid white;
+
+    &:hover {
+        background-color: yellow;
+        color: black;
+    }
+`;

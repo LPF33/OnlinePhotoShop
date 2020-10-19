@@ -1,7 +1,6 @@
 # Photo ECommerce-Shop
 
-Interested in building a Shop with backend & frontend. Manage stock, handle orders & implement checkout
-process. PayPal integration. Still under construction!
+Interested in building a responsive Webshop with backend & frontend. Manage stock, handle orders, shopping cart & implement checkout process. PayPal integration. Still under construction!
 
 ## Tech Stack:
 
@@ -19,9 +18,10 @@ process. PayPal integration. Still under construction!
 
 -   Shopping Cart
 -   Categorized by products
--   Checkout process (address, PayPal)
+-   Checkout process (address, billing, PayPal)
 -   PayPal-API (missing)
 -   Product Search
+-   Infinite Scrolling
 -   Wishlist
 -   Admin Management (missing)
 -   User Login (missing)
