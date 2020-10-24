@@ -27,15 +27,19 @@ export const cartReducer = (
 
     switch (action.type) {
         case ECartUpdate.Increment: {
-            const { id } = action.payload;
+            const { id, stock } = action.payload;
             const index: number = newState.products.findIndex(
                 (item) => item.id === id
             );
-            if (index !== -1) {
-                newState.products[index].counter += 1;
-            } else {
-                newState.products.push({ ...action.payload, counter: 1 });
+            if (stock > 0) {
+                if (index !== -1 && stock > newState.products[index].counter) {
+                    console.log(stock, newState.products[index].counter);
+                    newState.products[index].counter += 1;
+                } else if (index === -1) {
+                    newState.products.push({ ...action.payload, counter: 1 });
+                }
             }
+
             break;
         }
         case ECartUpdate.Decrement: {

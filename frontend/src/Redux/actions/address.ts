@@ -30,7 +30,6 @@ export interface TSetShippingAddress {
 export function setShippingAddress(
     address: TShippingAddress
 ): TSetShippingAddress {
-    console.log("hsda");
     return {
         type: EActionAddress.Shipping,
         payload: address,

@@ -19,7 +19,7 @@ const Cart: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const update = (item: TProductItem, value: ECartUpdate) => {
+    const update = (item: number, value: ECartUpdate) => {
         dispatch(updateCart(item, value));
     };
 
@@ -47,7 +47,7 @@ const Cart: React.FC = () => {
                                             className="fas fa-trash-alt"
                                             onClick={() =>
                                                 update(
-                                                    product,
+                                                    product.id,
                                                     ECartUpdate.Remove
                                                 )
                                             }
@@ -56,7 +56,7 @@ const Cart: React.FC = () => {
                                             className="fas fa-minus-circle"
                                             onClick={() =>
                                                 update(
-                                                    product,
+                                                    product.id,
                                                     ECartUpdate.Decrement
                                                 )
                                             }
@@ -66,7 +66,7 @@ const Cart: React.FC = () => {
                                             className="fas fa-plus-circle"
                                             onClick={() =>
                                                 update(
-                                                    product,
+                                                    product.id,
                                                     ECartUpdate.Increment
                                                 )
                                             }

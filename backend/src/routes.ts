@@ -11,7 +11,7 @@ const router: Router = Router();
 
 router.get("/api/category/:type", getCategoryProducts);
 router.get("/api/category", getCategory);
-router.get("/api/product/:category/:id", getSingleProduct);
+router.get("/api/product/:id", getSingleProduct);
 router.get("/api/bestproducts", getBestRatedProducts);
 router.get("/api/searchproducts/:search/:startId", getSearchProducts);
 router.get("/api/searchproducts/:search", getSearchProducts);

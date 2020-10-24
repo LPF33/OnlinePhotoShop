@@ -20,7 +20,7 @@ const Wishlist: React.FC = () => {
         (state: StoreState) => state.categories
     );
 
-    const fillCart = (item: TProductItem) => {
+    const fillCart = (item: number) => {
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
@@ -41,7 +41,7 @@ const Wishlist: React.FC = () => {
                                 <em>{item.price}€</em>
                                 <i
                                     className="fas fa-cart-plus"
-                                    onClick={() => fillCart(item)}
+                                    onClick={() => fillCart(item.id)}
                                 ></i>
                             </p>
                             <RemoveItemWishlist

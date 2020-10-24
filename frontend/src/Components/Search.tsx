@@ -69,7 +69,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
         }
     });
 
-    const fillCart = (item: TProductItem): void => {
+    const fillCart = (item: number): void => {
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
@@ -152,7 +152,7 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
                                 <em>{item.price}€</em>
                                 <i
                                     className="fas fa-cart-plus"
-                                    onClick={() => fillCart(item)}
+                                    onClick={() => fillCart(item.id)}
                                 ></i>
                             </p>
                         </CategoryListItem>

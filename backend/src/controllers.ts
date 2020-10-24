@@ -49,14 +49,11 @@ const getCategoryProducts = async (
 };
 
 const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
-    const { category, id } = req.params;
+    const { id } = req.params;
     try {
         const [
             result,
-        ] = await database.query(
-            "SELECT * FROM products where categories = ? AND id = ?;",
-            [category, id]
-        );
+        ] = await database.query("SELECT * FROM products where id = ?;", [id]);
         res.json({ success: true, result });
     } catch (err) {
         res.json({ success: false, err });

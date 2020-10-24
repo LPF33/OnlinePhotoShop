@@ -40,7 +40,7 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
         })();
     }, [params]);
 
-    const fillCart = (item: TProductItem) => {
+    const fillCart = (item: number) => {
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
@@ -61,7 +61,7 @@ const Category: React.FC<RouteComponentProps<CategoryProps>> = ({
                                 <em>{item.price}€</em>
                                 <i
                                     className="fas fa-cart-plus"
-                                    onClick={() => fillCart(item)}
+                                    onClick={() => fillCart(item.id)}
                                 ></i>
                             </p>
                         </CategoryListItem>

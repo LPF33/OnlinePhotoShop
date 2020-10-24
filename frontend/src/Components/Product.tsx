@@ -4,7 +4,12 @@ import { RouteComponentProps } from "react-router-dom";
 import Rating from "./Rating";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
+import {
+    updateCart,
+    ECartUpdate,
+    TProductItem,
+    TFetchProduct,
+} from "../Redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../Redux/actions/category";
 import { StoreState } from "../Redux/reducers/index";
 import { ProductWrapper } from "../Style/Category";
@@ -12,11 +17,6 @@ import { ProductWrapper } from "../Style/Category";
 interface TProductProps {
     category: string;
     id: string;
-}
-
-interface TFetchProduct {
-    success: boolean;
-    result: TProductItem[];
 }
 
 const Product: React.FC<RouteComponentProps<TProductProps>> = ({
@@ -43,9 +43,7 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
         (async () => {
             const {
                 data: { success, result },
-            } = await axios.get<TFetchProduct>(
-                `/api/product/${category}/${id}`
-            );
+            } = await axios.get<TFetchProduct>(`/api/product/${id}`);
             if (success && result.length === 1) {
                 setItem(result);
             } else {
@@ -55,7 +53,7 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
         })();
     }, []);
 
-    const fillCart = (item: TProductItem) => {
+    const fillCart = (item: number) => {
         dispatch(updateCart(item, ECartUpdate.Increment));
     };
 
@@ -74,7 +72,7 @@ const Product: React.FC<RouteComponentProps<TProductProps>> = ({
                         <Rating rating={item[0].rating} />
                         <i
                             className="fas fa-cart-plus"
-                            onClick={() => fillCart(item[0])}
+                            onClick={() => fillCart(item[0].id)}
                         ></i>
                     </section>
                 </div>

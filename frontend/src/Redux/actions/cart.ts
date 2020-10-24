@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import axios from "axios";
 
 export interface TProductItem {
     id: number;
@@ -20,16 +21,25 @@ export enum ECartUpdate {
     Remove = "remove",
 }
 
+export interface TFetchProduct {
+    success: boolean;
+    result: TProductItem[];
+}
+
 export interface UpdateCartAction {
     type: ECartUpdate;
     payload: TProductItem;
 }
 
-export const updateCart = (item: TProductItem, update: ECartUpdate) => {
-    return (dispatch: Dispatch) => {
+export const updateCart = (item: number, update: ECartUpdate) => {
+    return async (dispatch: Dispatch) => {
+        const {
+            data: { result, success },
+        } = await axios.get<TFetchProduct>(`/api/product/${item}`);
+
         dispatch<UpdateCartAction>({
             type: update,
-            payload: item,
+            payload: result[0],
         });
     };
 };
