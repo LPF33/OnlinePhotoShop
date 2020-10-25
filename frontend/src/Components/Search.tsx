@@ -1,5 +1,5 @@
 import * as React from "react";
-import axios from "axios";
+import axios, { Canceler, CancelTokenStatic } from "axios";
 import { RouteComponentProps, Link } from "react-router-dom";
 import Rating from "./Rating";
 import Loading from "./Loading";
@@ -22,7 +22,10 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
 
     const dispatch = useDispatch();
     const elemRef = React.useRef<HTMLDivElement>(null)!;
-    const ignoreAxios = React.useRef<boolean>(false);
+
+    // Cancel axios requests when new input
+    const CancelToken: CancelTokenStatic = axios.CancelToken;
+    const cancelAxios = React.useRef<Canceler | null>(null);
 
     const [result, setSearch] = React.useState<TProductItem[]>([]);
     const [inputText, setInputText] = React.useState<string>(search);
@@ -31,43 +34,45 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
     const [scroll, setScroll] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        ignoreAxios.current = false;
         setNoMore(false);
         setScroll(false);
 
         (async () => {
-            let response: TResponse;
-            if (!inputText) {
+            let response: TResponse | null = null;
+
+            try {
                 response = await axios.get<TFetchCategoryItems>(
-                    `/api/searchproducts/all`
+                    !inputText
+                        ? `/api/searchproducts/all`
+                        : `/api/searchproducts/${inputText}`,
+                    {
+                        cancelToken: new CancelToken(function executor(c) {
+                            cancelAxios.current = c;
+                        }),
+                    }
                 );
-            } else {
-                response = await axios.get<TFetchCategoryItems>(
-                    `/api/searchproducts/${inputText}`
-                );
+            } catch (error) {
+                if (axios.isCancel(error)) {
+                    setLoading(false);
+                    return setSearch([]);
+                }
             }
 
             setLoading(false);
-            if (!ignoreAxios.current && response.data.success) {
-                setSearch(response.data.result);
+            if (response && response.data.success) {
+                return setSearch(response.data.result);
             } else {
-                setSearch([]);
+                return setSearch([]);
             }
         })();
 
         return () => {
-            ignoreAxios.current = true;
+            if (cancelAxios.current) {
+                cancelAxios.current();
+                cancelAxios.current = null;
+            }
         };
     }, [inputText]);
-
-    React.useEffect(() => {
-        if (elemRef.current) {
-            console.log(
-                elemRef.current.scrollHeight,
-                elemRef.current.clientHeight
-            );
-        }
-    });
 
     const fillCart = (item: number): void => {
         dispatch(updateCart(item, ECartUpdate.Increment));
@@ -75,25 +80,21 @@ const SearchProducts: React.FC<RouteComponentProps<TSearchProps>> = ({
 
     const loadData = async (): Promise<void> => {
         setLoading(true);
-        let response: TResponse;
-        if (!inputText) {
-            response = await axios.get<TFetchCategoryItems>(
-                `/api/searchproducts/all/${result[result.length - 1].id}`
-            );
-        } else {
-            response = await axios.get<TFetchCategoryItems>(
-                `/api/searchproducts/${inputText}/${
-                    result[result.length - 1].id
-                }`
-            );
-        }
+        const response: TResponse = await axios.get<TFetchCategoryItems>(
+            !inputText
+                ? `/api/searchproducts/all/${result[result.length - 1].id}`
+                : `/api/searchproducts/${inputText}/${
+                      result[result.length - 1].id
+                  }`,
+            {
+                cancelToken: new CancelToken(function executor(c) {
+                    cancelAxios.current = c;
+                }),
+            }
+        );
 
         setLoading(false);
-        if (
-            response.data.success &&
-            response.data.result &&
-            !ignoreAxios.current
-        ) {
+        if (response.data.success && response.data.result) {
             setSearch((prev) => [...prev, ...response.data.result]);
         } else {
             setNoMore(true);
