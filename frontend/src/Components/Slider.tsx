@@ -3,7 +3,7 @@ import { MainScreenWrapper } from "../Style/AuthScreen";
 import axios from "axios";
 
 import Slide from "./Slide";
-import SliderWrapper, { TSlideWrapperProps } from "./SlideWrapper";
+import SliderWrapper from "./SlideWrapper";
 import SliderButton, { ButtonDirection } from "./SliderButton";
 import SliderDots from "./SliderDots";
 
@@ -18,9 +18,7 @@ export interface TImages {
 }
 
 interface State {
-    translate: number;
     currentSlide: number;
-    transition: number;
     imageArr: TImages[];
 }
 
@@ -29,20 +27,50 @@ interface TFetchBestProducts {
     result: TImages[];
 }
 
+export type TSlidePosition = "activeSlide" | "nextSlide" | "lastSlide";
+
 const Slider: React.FC = () => {
     const [sliderState, setSliderState] = React.useState<State>({
-        translate: 0,
         currentSlide: 0,
-        transition: 1,
         imageArr: [],
     });
 
     const animationId = React.useRef<number>(0);
-    const transitionRef = React.useRef<() => void | null>(null!);
 
-    React.useEffect(() => {
-        transitionRef.current = changeImageArr;
-    });
+    const slide = (direction: ButtonDirection): void => {
+        clearTimeout(animationId.current);
+        switch (direction) {
+            case ButtonDirection.LEFT:
+                setSliderState((prev) => {
+                    let index = prev.currentSlide - 1;
+                    if (index < 0) {
+                        index = prev.imageArr.length - 1;
+                    }
+
+                    return { ...prev, currentSlide: index };
+                });
+                break;
+
+            case ButtonDirection.RIGHT:
+                setSliderState((prev) => {
+                    let index = prev.currentSlide + 1;
+                    if (index > prev.imageArr.length - 1) {
+                        index = 0;
+                    }
+
+                    return { ...prev, currentSlide: index };
+                });
+                break;
+
+            default:
+                break;
+        }
+
+        animationId.current = setTimeout(
+            () => slide(ButtonDirection.RIGHT),
+            3000
+        );
+    };
 
     React.useEffect(() => {
         (async () => {
@@ -54,87 +82,40 @@ const Slider: React.FC = () => {
             }
         })();
 
-        const trans = () => {
-            transitionRef.current();
-        };
-
-        window.addEventListener("transitionend", trans);
-
         animationId.current = setTimeout(
             () => slide(ButtonDirection.RIGHT),
             3000
         );
 
-        return () => {
-            window.removeEventListener("transitionend", trans);
-            clearTimeout(animationId.current);
-        };
+        return () => clearTimeout(animationId.current);
     }, []);
-
-    const changeImageArr = () => {
-        const helper: TImages[] = [...sliderState.imageArr];
-        const firstPic: TImages = helper.shift()!;
-        helper.push(firstPic);
-
-        setSliderState({
-            ...sliderState,
-            transition: 0,
-            translate: 0,
-            imageArr: helper,
-        });
-    };
-
-    const slide = (direction: ButtonDirection): void => {
-        clearTimeout(animationId.current);
-        switch (direction) {
-            case ButtonDirection.LEFT:
-                setSliderState((prev) => ({
-                    ...prev,
-                    currentSlide:
-                        prev.currentSlide === 0
-                            ? prev.imageArr.length - 1
-                            : prev.currentSlide - 1,
-                    translate: prev.translate - 100,
-                    transition: 1,
-                }));
-                break;
-
-            case ButtonDirection.RIGHT:
-                setSliderState((prev) => ({
-                    ...prev,
-                    currentSlide:
-                        prev.currentSlide === prev.imageArr.length - 1
-                            ? 0
-                            : prev.currentSlide + 1,
-                    translate: prev.translate + 100,
-                    transition: 1,
-                }));
-                break;
-            default:
-                break;
-        }
-
-        animationId.current = setTimeout(
-            () => slide(ButtonDirection.RIGHT),
-            3000
-        );
-    };
 
     const { touch } = useDetectTouch(slide);
 
-    const slideWrapperProps: TSlideWrapperProps = {
-        width: sliderState.imageArr.length * 100,
-        translate: sliderState.translate / sliderState.imageArr.length,
-        transition: sliderState.transition,
-    };
-
     return (
         <MainScreenWrapper>
-            <SliderWrapper styleProps={slideWrapperProps}>
-                {sliderState.imageArr.length > 4 &&
-                    sliderState.imageArr.map((item, index) => (
-                        <Slide foto={item} key={index} />
-                    ))}
+            <SliderWrapper>
+                {sliderState.imageArr.length > 0 &&
+                    sliderState.imageArr.map((item, index) => {
+                        let position: TSlidePosition = "nextSlide";
+                        if (index === sliderState.currentSlide) {
+                            position = "activeSlide";
+                        }
+                        if (
+                            index === sliderState.currentSlide - 1 ||
+                            (sliderState.currentSlide === 0 &&
+                                index === sliderState.imageArr.length - 1)
+                        ) {
+                            position = "lastSlide";
+                        }
+                        return (
+                            <Slide
+                                foto={item}
+                                position={position}
+                                key={index}
+                            />
+                        );
+                    })}
             </SliderWrapper>
             {!touch && (
                 <SliderButton

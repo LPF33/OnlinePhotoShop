@@ -1,13 +1,31 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { TImages } from "./Slider";
+import { TImages, TSlidePosition } from "./Slider";
 import Rating from "./Rating";
 
 const LinkTo = styled(Link)`
-    position: relative;
-    width: calc(100% / 5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    transition: 1s ease-in all;
+
+    &.activeSlide {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &.lastSlide {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    &.nextSlide {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 `;
 
 const Figure = styled.figure`
@@ -35,11 +53,15 @@ const Figcaption = styled.figcaption`
 
 interface TProps {
     foto: TImages;
+    position: TSlidePosition;
 }
 
-const Slide: React.FC<TProps> = ({ foto }) => {
+const Slide: React.FC<TProps> = ({ foto, position }) => {
     return (
-        <LinkTo to={`/product/${foto.categories}/${foto.id}`}>
+        <LinkTo
+            to={`/product/${foto.categories}/${foto.id}`}
+            className={position}
+        >
             <Figure>
                 <Image alt={foto.name} src={foto.image} />
                 <Figcaption>
