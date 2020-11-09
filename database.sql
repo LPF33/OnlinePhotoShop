@@ -2,6 +2,7 @@ CREATE DATABASE shopiholic;
 USE shopiholic;
 
 DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE products (
     id int NOT NULL auto_increment,
@@ -22,3 +23,12 @@ INSERT INTO products (name, image, description, brand, category, price, stock, r
     VALUES ("HAMA Circular", "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_74695336/fee_786_587_png", 
     "Filterdurchmesser: 62 mm, Farbe: Schwarz", "hama", "Objective lens", 37.84, 1, 0, 0
 );
+
+CREATE TABLE users (
+	id int NOT NULL auto_increment,
+    name varchar(250) NOT NULL,
+    email varchar(250) NOT NULL unique,
+    password varchar(250) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    primary key(id)    
+)

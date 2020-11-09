@@ -1,9 +1,5 @@
 import { Response, Request } from "express";
-import database from "./database";
-
-interface RequestWithBody extends Request {
-    body: { [key: string]: string | undefined };
-}
+import database from "../database";
 
 const getCategory = async (req: Request, res: Response): Promise<void> => {
     try {
