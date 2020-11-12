@@ -4,10 +4,19 @@ import { RouteComponentProps, Link } from "react-router-dom";
 import Rating from "./Rating";
 import Loading from "./Loading";
 import { useDispatch } from "react-redux";
-import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
+import {
+    updateCart,
+    ECartUpdate,
+    TProductItem,
+} from "../Redux/actions/cart.action";
 import { TFetchCategoryItems } from "./Category";
-import { SearchBar, SearchWrapper, NoSearch, More } from "../Style/Search";
-import { CategoryListItem } from "../Style/Category";
+import {
+    SearchBar,
+    SearchWrapper,
+    NoSearch,
+    More,
+} from "../Style/Search.styles";
+import { CategoryListItem } from "../Style/Category.styles";
 
 type TSearchProps = {
     search: string;

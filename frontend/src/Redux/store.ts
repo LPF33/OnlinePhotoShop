@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { reducers } from "./reducers/index";
+import { reducers } from "./reducers/index.reducer";
 
 const initalState = localStorage.getItem("cart")
     ? localStorage.getItem("address")

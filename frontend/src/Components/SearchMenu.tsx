@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IconLinkWrapper, Icon } from "../Style/NavMenuIcons";
+import { IconLinkWrapper, Icon } from "../Style/NavMenuIcons.styles";
 
 const SearchMenu: React.FC = () => {
     return (

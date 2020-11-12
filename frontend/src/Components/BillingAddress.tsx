@@ -1,8 +1,8 @@
 import * as React from "react";
-import { AddressWrapper, AddressForm, Next } from "../Style/Address";
+import { AddressWrapper, AddressForm, Next } from "../Style/Address.styles";
 import { EnumAddress, useVerifyAddress } from "../CustomHooks/VerifyAddress";
 import { useHistory } from "react-router-dom";
-import { EActionAddress } from "../Redux/actions/address";
+import { EActionAddress } from "../Redux/actions/address.action";
 
 const BillingAddress: React.FC = () => {
     const history = useHistory();

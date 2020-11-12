@@ -3,9 +3,13 @@ import axios from "axios";
 import { RouteComponentProps, Link } from "react-router-dom";
 import Rating from "./Rating";
 import { useDispatch } from "react-redux";
-import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
+import {
+    updateCart,
+    ECartUpdate,
+    TProductItem,
+} from "../Redux/actions/cart.action";
 
-import { CategoryWrapper, CategoryListItem } from "../Style/Category";
+import { CategoryWrapper, CategoryListItem } from "../Style/Category.styles";
 import Loading from "./Loading";
 
 export interface TFetchCategoryItems {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LoadingElement, Text } from "../Style/Loading";
+import { LoadingElement, Text } from "../Style/Loading.styles";
 
 const Loading: React.FC = () => {
     return (

@@ -6,10 +6,10 @@ import {
     setShippingAddress,
     setBillingAddress,
     setHasAddress,
-} from "../Redux/actions/address";
+} from "../Redux/actions/address.action";
 import { useSelector, useDispatch } from "react-redux";
-import { StoreState } from "../Redux/reducers/index";
-import { TAddressState } from "../Redux/reducers/address";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import { TAddressState } from "../Redux/reducers/address.reducer";
 
 import {
     checkName,

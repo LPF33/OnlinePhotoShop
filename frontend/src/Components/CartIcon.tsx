@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { StoreState } from "../Redux/reducers/index";
+import { StoreState } from "../Redux/reducers/index.reducer";
 import {
     IconLinkWrapper,
     Icon,
     CartCounter,
     AddCartInfo,
-} from "../Style/NavMenuIcons";
+} from "../Style/NavMenuIcons.styles";
 
 const CartIcon: React.FC = () => {
     const location = useLocation();

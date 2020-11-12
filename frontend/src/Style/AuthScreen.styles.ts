@@ -55,3 +55,7 @@ export const MainGoLink = styled(Link)`
     align-items: center;
     justify-content: center;
 `;
+
+export const Error = styled.h3`
+    color: red;
+`;

@@ -1,4 +1,4 @@
-import * as TAddress from "../actions/address";
+import * as TAddress from "../actions/address.action";
 
 export interface TAddressState {
     shipping: TAddress.TShippingAddress;
@@ -40,7 +40,7 @@ export const addressReducer = (
         | TAddress.TSetHasAddress
         | TAddress.TSetPaymentMethod
 ) => {
-    const newState = { ...state };
+    const newState: TAddressState = { ...state };
     switch (action.type) {
         case TAddress.EActionAddress.Shipping:
             newState.shipping = action.payload;

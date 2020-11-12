@@ -1,9 +1,12 @@
 import * as React from "react";
-import { AddressWrapper, AddressForm, Next } from "../Style/Address";
+import { AddressWrapper, AddressForm, Next } from "../Style/Address.styles";
 import { EnumAddress, useVerifyAddress } from "../CustomHooks/VerifyAddress";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { EActionAddress, setSecondAddress } from "../Redux/actions/address";
+import {
+    EActionAddress,
+    setSecondAddress,
+} from "../Redux/actions/address.action";
 
 const Shipping: React.FC = () => {
     const dispatch = useDispatch();

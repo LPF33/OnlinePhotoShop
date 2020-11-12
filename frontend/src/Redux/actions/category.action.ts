@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { TProductItem } from "./cart";
+import { TProductItem } from "./cart.action";
 
 export enum ECategoryActions {
     FetchCategory = "fetchcategory",

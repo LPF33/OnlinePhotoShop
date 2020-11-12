@@ -1,9 +1,12 @@
 import * as React from "react";
-import { PaymentWrapper, PaymentForm, Next } from "../Style/Payment";
+import { PaymentWrapper, PaymentForm, Next } from "../Style/Payment.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import { StoreState } from "../Redux/reducers/index";
-import { setPaymentMethod, EPaymentMethod } from "../Redux/actions/address";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import {
+    setPaymentMethod,
+    EPaymentMethod,
+} from "../Redux/actions/address.action";
 
 const Payment: React.FC<RouteComponentProps> = ({ history }) => {
     const hasAddress: boolean = useSelector(

@@ -4,13 +4,17 @@ import {
     CartItemsWrappper,
     CartNextStep,
     CartItem,
-} from "../Style/cart";
+} from "../Style/cart.styles";
 import { useSelector } from "react-redux";
-import { StoreState } from "../Redux/reducers/index";
-import { TCartState } from "../Redux/reducers/cart";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import { TCartState } from "../Redux/reducers/cart.reducer";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
+import {
+    updateCart,
+    ECartUpdate,
+    TProductItem,
+} from "../Redux/actions/cart.action";
 
 const Cart: React.FC = () => {
     const wholeCart: TCartState = useSelector(

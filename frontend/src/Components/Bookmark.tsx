@@ -1,7 +1,11 @@
 import * as React from "react";
-import { IconWrapper, IconLinkWrapper, Icon } from "../Style/NavMenuIcons";
+import {
+    IconWrapper,
+    IconLinkWrapper,
+    Icon,
+} from "../Style/NavMenuIcons.styles";
 import { useSelector } from "react-redux";
-import { StoreState } from "../Redux/reducers/index";
+import { StoreState } from "../Redux/reducers/index.reducer";
 
 const Bookmark: React.FC = () => {
     const wishlistActive: boolean = useSelector((state: StoreState) => {

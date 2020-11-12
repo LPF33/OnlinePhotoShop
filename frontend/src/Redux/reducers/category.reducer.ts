@@ -4,8 +4,8 @@ import {
     ECategoryActions,
     TAddToWishlist,
     TRemoveFromWishlist,
-} from "../actions/category";
-import { TProductItem } from "../actions/cart";
+} from "../actions/category.action";
+import { TProductItem } from "../actions/cart.action";
 
 export interface TCategoryState extends TFetchCategory {
     wishlist: TProductItem[];

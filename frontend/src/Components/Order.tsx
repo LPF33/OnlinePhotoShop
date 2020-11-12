@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import { StoreState } from "../Redux/reducers/index";
-import { EPaymentMethod } from "../Redux/actions/address";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import { EPaymentMethod } from "../Redux/actions/address.action";
 
 const Order: React.FC<RouteComponentProps> = ({ history }) => {
     const [WholeState, check]: [StoreState, boolean] = useSelector(

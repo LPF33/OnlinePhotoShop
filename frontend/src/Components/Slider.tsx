@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MainScreenWrapper } from "../Style/AuthScreen";
+import { MainScreenWrapper } from "../Style/AuthScreen.styles";
 import axios from "axios";
 
 import Slide from "./Slide";

@@ -2,16 +2,20 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../Redux/reducers/index";
-import { TCategoryState } from "../Redux/reducers/category";
-import { updateCart, ECartUpdate, TProductItem } from "../Redux/actions/cart";
-import { removeFromWishlist } from "../Redux/actions/category";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import { TCategoryState } from "../Redux/reducers/category.reducer";
+import {
+    updateCart,
+    ECartUpdate,
+    TProductItem,
+} from "../Redux/actions/cart.action";
+import { removeFromWishlist } from "../Redux/actions/category.action";
 import {
     CategoryWrapper,
     CategoryListItem,
     RemoveItemWishlist,
     WishlistNoItem,
-} from "../Style/Category";
+} from "../Style/Category.styles";
 
 const Wishlist: React.FC = () => {
     const dispatch = useDispatch();

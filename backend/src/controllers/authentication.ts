@@ -85,6 +85,7 @@ const loginUser = async (req: TLoginRequestBody, res: Response) => {
     if (!email || !password) {
         res.json({
             success: false,
+            token: "",
             error: "Please, fill in all fields",
         });
     } else {
@@ -106,17 +107,20 @@ const loginUser = async (req: TLoginRequestBody, res: Response) => {
                             user.name,
                             Boolean(user.isAdmin)
                         ),
+                        error: "",
                     });
                 }
             }
 
             res.json({
                 success: false,
+                token: "",
                 error: "Your email or password is not correct",
             });
         } catch (err) {
             res.json({
                 success: false,
+                token: "",
                 error: "Server error",
             });
         }

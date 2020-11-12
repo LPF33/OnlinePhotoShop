@@ -1,5 +1,5 @@
-import * as TCart from "../actions/cart";
-import { ECartUpdate, TProductItem } from "../actions/cart";
+import * as TCart from "../actions/cart.action";
+import { ECartUpdate, TProductItem } from "../actions/cart.action";
 
 interface TProductReducer extends TProductItem {
     counter: number;
@@ -33,7 +33,6 @@ export const cartReducer = (
             );
             if (stock > 0) {
                 if (index !== -1 && stock > newState.products[index].counter) {
-                    console.log(stock, newState.products[index].counter);
                     newState.products[index].counter += 1;
                 } else if (index === -1) {
                     newState.products.push({ ...action.payload, counter: 1 });

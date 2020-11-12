@@ -9,10 +9,13 @@ import {
     ECartUpdate,
     TProductItem,
     TFetchProduct,
-} from "../Redux/actions/cart";
-import { addToWishlist, removeFromWishlist } from "../Redux/actions/category";
-import { StoreState } from "../Redux/reducers/index";
-import { ProductWrapper } from "../Style/Category";
+} from "../Redux/actions/cart.action";
+import {
+    addToWishlist,
+    removeFromWishlist,
+} from "../Redux/actions/category.action";
+import { StoreState } from "../Redux/reducers/index.reducer";
+import { ProductWrapper } from "../Style/Category.styles";
 
 interface TProductProps {
     category: string;
