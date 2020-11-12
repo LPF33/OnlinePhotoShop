@@ -9,6 +9,7 @@ Interested in building a responsive Webshop with backend & frontend. Manage stoc
 -   Redux
 -   MySQL
 -   Node.js
+-   JWT Authentication
 
 ## Preview:
 
@@ -24,6 +25,7 @@ Interested in building a responsive Webshop with backend & frontend. Manage stoc
 -   Infinite Scrolling
 -   Wishlist
 -   Admin Management (missing)
--   User Login (missing)
--   Product rating
+-   User Login / Registration
+-   Order History (missing)
+-   Product rating / review (missing)
 -   Product Carousel
