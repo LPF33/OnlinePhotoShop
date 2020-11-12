@@ -2,7 +2,7 @@ import * as React from "react";
 import { IconLinkWrapper, Icon } from "../Style/NavMenuIcons.styles";
 import { useSelector } from "react-redux";
 import { StoreState } from "../Redux/reducers/index.reducer";
-import { TLoginState } from "../Redux/reducers/login.reducer";
+import { TLoginState } from "../Redux/reducers/auth.reducer";
 
 const User: React.FC = () => {
     const loginState: TLoginState = useSelector(
@@ -11,7 +11,7 @@ const User: React.FC = () => {
 
     return loginState.token ? (
         <IconLinkWrapper to="/profile">
-            <Icon className="fas fa-user"></Icon>
+            <Icon className="fas fa-user profile"></Icon>
         </IconLinkWrapper>
     ) : (
         <IconLinkWrapper to="/login">

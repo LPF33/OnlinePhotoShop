@@ -27,6 +27,10 @@ export const IconLinkWrapper = styled(Link)`
     .active {
         color: rgb(253, 255, 137);
     }
+
+    .profile {
+        color: rgb(0, 39, 110);
+    }
 `;
 
 export const Icon = styled.i`

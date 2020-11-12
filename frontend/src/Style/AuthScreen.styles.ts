@@ -20,15 +20,12 @@ export const MainScreenWrapper = styled.div`
 export const FormElement = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-evenly;
     height: 80%;
 
-    & > h1 {
-        color: white;
-    }
-
     & > input {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
         padding: 10px;
         border-radius: 10px;
     }
@@ -36,6 +33,7 @@ export const FormElement = styled.form`
     & > [type="submit"] {
         background-color: rgb(196, 196, 196);
         cursor: pointer;
+        width: 100%;
 
         &:hover {
             background-color: rgb(31, 55, 122);
@@ -54,6 +52,10 @@ export const MainGoLink = styled(Link)`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const Headline = styled.h1`
+    color: white;
 `;
 
 export const Error = styled.h3`

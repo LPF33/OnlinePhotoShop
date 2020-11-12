@@ -70,3 +70,44 @@ export const logout = (): TLogoutAction => {
         type: ELoginActions.Logout,
     };
 };
+
+export const setError = (message: string): TLoginErrorAction => {
+    return {
+        type: ELoginActions.Login_Error,
+        payload: message,
+    };
+};
+
+export const registration = (email: string, name: string, password: string) => {
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch<TLoginLoadingAction>({
+                type: ELoginActions.Login_Loading,
+            });
+
+            const {
+                data: { token, error, success },
+            } = await axios.post<TFetchLoginData>("/api/auth/registration", {
+                email,
+                name,
+                password,
+            });
+
+            if (error) {
+                throw new Error(error);
+            }
+
+            if (token) {
+                dispatch<TLoginSuccessAction>({
+                    type: ELoginActions.Login_Success,
+                    payload: token,
+                });
+            }
+        } catch (err) {
+            dispatch<TLoginErrorAction>({
+                type: ELoginActions.Login_Error,
+                payload: err.message,
+            });
+        }
+    };
+};

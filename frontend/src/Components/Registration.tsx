@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
     MainScreenWrapper,
     MainGoLink,
@@ -8,19 +8,29 @@ import {
 } from "../Style/AuthScreen.styles";
 import Loading from "./Loading";
 import useNoResizeOnFocus from "../CustomHooks/NoResizeOnInput";
+import {
+    checkEmail,
+    checkName,
+    checkPassword,
+} from "../CustomHooks/HelperFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { login, setError } from "../Redux/actions/auth.action";
+import { registration, setError } from "../Redux/actions/auth.action";
 import { StoreState } from "../Redux/reducers/index.reducer";
 import { TLoginState } from "../Redux/reducers/auth.reducer";
 import { RouteComponentProps } from "react-router-dom";
 
-interface TLogin {
+interface TStateRegistration {
     email: string;
+    name: string;
     password: string;
 }
 
-const Login: React.FC<RouteComponentProps> = ({ location, history }) => {
-    const [data, setData] = React.useState<TLogin>({ email: "", password: "" });
+const Registration: React.FC<RouteComponentProps> = ({ location, history }) => {
+    const [data, setData] = React.useState<TStateRegistration>({
+        email: "",
+        name: "",
+        password: "",
+    });
     const emailRef = React.useRef<HTMLInputElement>(null);
     const redirect = location.search
         ? location.search.split("=")[1]
@@ -56,7 +66,22 @@ const Login: React.FC<RouteComponentProps> = ({ location, history }) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        dispatch(login(data.email, data.password));
+        const emailCheck = checkEmail(data.email);
+        if (!emailCheck[0]) {
+            dispatch(setError(emailCheck[1]));
+            return;
+        }
+        const nameCheck = checkName("name", data.name);
+        if (!nameCheck[0]) {
+            dispatch(setError(nameCheck[1]));
+            return;
+        }
+        const passwordCheck = checkPassword(data.password);
+        if (!passwordCheck[0]) {
+            dispatch(setError(passwordCheck[1]));
+            return;
+        }
+        dispatch(registration(data.email, data.name, data.password));
     };
 
     return (
@@ -66,7 +91,7 @@ const Login: React.FC<RouteComponentProps> = ({ location, history }) => {
             ) : (
                 <>
                     <Headline>
-                        LOGIN <i className="fas fa-sign-in-alt"></i>
+                        Registration <i className="fas fa-registered"></i>
                     </Headline>
                     {loginState.error && <Error>{loginState.error}</Error>}
                     <FormElement onSubmit={handleSubmit}>
@@ -79,6 +104,13 @@ const Login: React.FC<RouteComponentProps> = ({ location, history }) => {
                             ref={emailRef}
                         />
                         <input
+                            type="text"
+                            name="name"
+                            placeholder="Your name"
+                            onChange={handleChange}
+                            value={data.name}
+                        />
+                        <input
                             type="password"
                             name="password"
                             placeholder="Your password"
@@ -86,15 +118,13 @@ const Login: React.FC<RouteComponentProps> = ({ location, history }) => {
                             onChange={handleChange}
                             autoComplete="off"
                         />
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Register" />
                     </FormElement>
-                    <MainGoLink to="/registration">
-                        No Account? Register today!
-                    </MainGoLink>
+                    <MainGoLink to="/login">You have an Account?</MainGoLink>
                 </>
             )}
         </MainScreenWrapper>
     );
 };
 
-export default Login;
+export default Registration;

@@ -4,7 +4,7 @@ import {
     TLoginSuccessAction,
     TLogoutAction,
     ELoginActions,
-} from "../actions/login.action";
+} from "../actions/auth.action";
 
 interface TJWToken {
     id: number;

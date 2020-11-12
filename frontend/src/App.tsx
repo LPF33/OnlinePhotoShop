@@ -17,6 +17,7 @@ import Order from "./Components/Order";
 import Search from "./Components/Search";
 import Wishlist from "./Components/Wishlist";
 import Profile from "./Components/Profile";
+import Registration from "./Components/Registration";
 
 const BodyWrapper = styled.div`
     position: relative;
@@ -40,6 +41,11 @@ const App: React.FC = (): JSX.Element => {
                         <Slider />
                     </Route>
                     <Route exact path="/login" component={Login} />
+                    <Route
+                        exact
+                        path="/registration"
+                        component={Registration}
+                    />
                     <Route exact path="/menu">
                         <Menu />
                     </Route>
