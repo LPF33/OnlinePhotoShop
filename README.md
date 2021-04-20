@@ -1,6 +1,6 @@
 # Photo eCommerce-Shop
 
-Interested in building a responsive Webshop with backend & frontend. Manage stock, handle orders, update shopping cart & implement checkout process. PayPal integration. Still under construction!
+Interested in building a responsive Webshop with backend & frontend. Manage stock, handle orders, update shopping cart & implement checkout process.
 
 ## Tech Stack:
 
@@ -24,8 +24,5 @@ Interested in building a responsive Webshop with backend & frontend. Manage stoc
 -   Product Search
 -   Infinite Scrolling
 -   Wishlist
--   Admin Management (missing)
 -   User Login / Registration
--   Order History (missing)
--   Product rating / review (missing)
 -   Product Carousel
